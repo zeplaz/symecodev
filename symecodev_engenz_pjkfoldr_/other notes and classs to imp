@@ -1,0 +1,366 @@
+class Actor
+{
+friend class ActorFactory;
+typedef std::map<ComponentId, StrongActorComponentPtr> ActorComponents;
+ActorId m_id;
+// unique id for the actor
+ActorComponents m_components; // all components this actor has
+public:
+explicit Actor(ActorId id);
+ ̃ Actor(void);
+bool Init(TiXmlElement* pData);
+void PostInit(void);
+void Destroy(void);
+165166
+Chapter 6 n Game Actors and Component Architecture
+void Update(int deltaMs);
+// accessors
+ActorId GetId(void) const { return m_id; }
+// template function for retrieving components
+template <class ComponentType>
+weak_ptr<ComponentType> GetComponent(ComponentId id)
+{
+ActorComponents::iterator findIt = m_components.find(id);
+if (findIt != m_components.end())
+{
+StrongActorComponentPtr pBase(findIt->second);
+// cast to subclass version of the pointer
+shared_ptr<ComponentType> pSub(
+std::tr1::static_pointer_cast<ComponentType>(pBase));
+weak_ptr<ComponentType> pWeakSub(pSub); // convert strong pointer
+// to weak pointer
+return pWeakSub; // return the weak pointer
+}
+else
+{
+return weak_ptr<ComponentType>();
+}
+}
+private:
+// This is called by the ActorFactory; no one else should be
+// adding components.
+void AddComponent(StrongActorComponentPtr pComponent);
+};
+
+
+
+
+
+
+
+
+
+class that’s responsible for parsing this data and creating the actor instance.
+typedef ActorComponent *(*ActorComponentCreator)(void);
+typedef std::map<std::string, ActorComponentCreator> ActorComponentCreatorMap;
+// some actor typedefs to make our life easier
+typdef unsigned long ActorId;
+typedef shared_ptr<Actor> StrongActorPtr;
+typedef shared_ptr<ActorComponent> StrongActorComponentPtr;
+class ActorFactory
+{
+ActorId m_lastActorId;
+161162
+Chapter 6 n Game Actors and Component Architecture
+protected:
+ActorComponentCreatorMap m_actorComponentCreators;
+public:
+ActorFactory(void);
+StrongActorPtr CreateActor(const char* actorResource);
+protected:
+virtual StrongActorComponentPtr CreateComponent(TiXmlElement* pData);
+private:
+ActorId GetNextActorId(void) { ++m_lastActorId; return m_lastActorId; }
+};
+
+
+class ActorComponent
+{
+friend class ActorFactory;
+167168
+Chapter 6 n Game Actors and Component Architecture
+protected:
+StrongActorPtr m_pOwner;
+public:
+virtual  ̃ActorComponent(void) { }
+// These functions are meant to be overridden by the implementation
+// classes of the components.
+virtual bool VInit(TiXmlElement* pData) = 0;
+virtual void VPostInit(void) { }
+virtual void VUpdate(int deltaMs) { }
+// This function should be overridden by the interface class.
+virtual ComponentId VGetComponentId(void) const = 0;
+private:
+void SetOwner(StrongActorPtr pOwner) { m_pOwner = pOwner; }
+};
+
+
+
+Process :
+// some smart pointer typedef’s
+class Process;
+typedef shared_ptr<Process> StrongProcessPtr;
+typedef weak_ptr<Process> WeakProcessPtr;
+class Process
+{
+friend class ProcessManager;
+public:
+enum State
+{
+// Processes that are neither dead nor alive
+UNINITIALIZED = 0, // created but not running
+REMOVED, // removed from the process list but not destroyed; this can
+// happen when a process that is already running is parented
+// to another process.
+// Living processes
+RUNNING, // initialized and runningOrganizing the Main Loop
+PAUSED, // initialized but paused
+// Dead processes
+SUCCEEDED, // completed successfully
+FAILED,
+// failed to complete
+ABORTED, // aborted; may not have started
+};
+private:
+State m_state;
+// the current state of the process
+StrongProcessPtr m_pChild; // the child process, if any
+public:
+// construction
+Process(void);
+virtual  ̃Process(void);
+protected:
+// interface; these functions should be overridden by the subclass as needed
+virtual void VOnInit(void) { m_state = RUNNING; }
+virtual void VOnUpdate(unsigned long deltaMs) = 0;
+virtual void VOnSuccess(void) { }
+virtual void VOnFail(void) { }
+virtual void VOnAbort(void) { }
+public:
+// Functions for ending the process.
+inline void Succeed(void);
+inline void Fail(void);
+// pause
+inline void Pause(void);
+inline void UnPause(void);
+// accessors
+State GetState(void) const { return m_state; }
+bool IsAlive(void) const {return (m_state == RUNNING || m_state == PAUSED);}
+bool IsDead(void) const
+{
+return (m_state == SUCCEEDED || m_state == FAILED || m_state == ABORTED);
+}
+bool IsRemoved(void) const { return (m_state == REMOVED); }
+bool IsPaused(void) const { return m_state == PAUSED; }
+// child functions
+inline void AttachChild(StrongProcessPtr pChild);
+StrongProcessPtr RemoveChild(void); // releases ownership of the child
+StrongProcessPtr PeekChild(void) { return m_pChild; } // doesn’t release
+// ownership of child
+181182
+Chapter 7 n Controlling the Main Loop
+private:
+void SetState(State newState) { m_state = newState; }
+
+
+class ProcessManager
+{
+typedef std::list<StrongProcessPtr> ProcessList;
+ProcessList m_processList;
+public:
+// construction
+ ̃ ProcessManager(void);
+// interface
+unsigned int UpdateProcesses(unsigned long deltaMs);
+WeakProcessPtr AttachProcess(StrongProcessPtr pProcess);
+void AbortAllProcesses(bool immediate);
+// accessors
+unsigned int GetProcessCount(void) const { return m_processList.size(); }
+private:
+void ClearAllProcesses(void); // should only be called by the destructor
+};
+};
+
+
+unsigned int ProcessManager::UpdateProcesses(unsigned long deltaMs)
+{
+unsigned short int successCount = 0;
+unsigned short int failCount = 0;
+ProcessList::iterator it = m_processList.begin();
+while (it != m_processList.end())
+{
+// grab the next process
+StrongProcessPtr pCurrProcess = (*it);
+// save the iterator and increment the old one in case we need to remove
+// this process from the list
+ProcessList::iterator thisIt = it;
+++it;
+// process is uninitialized, so initialize it
+if (pCurrProcess->GetState() == Process::UNINITIALIZED)
+pCurrProcess->VOnInit();
+// give the process an update tick if it’s running
+if (pCurrProcess->GetState() == Process::RUNNING)
+pCurrProcess->VOnUpdate(deltaMs);
+// check to see if the process is dead
+if (pCurrProcess->IsDead())
+{
+// run the appropriate exit function
+switch (pCurrProcess->GetState())
+{
+case Process::SUCCEEDED :Organizing the Main Loop
+{
+pCurrProcess->VOnSuccess();
+StrongProcessPtr pChild = pCurrProcess->RemoveChild();
+if (pChild)
+AttachProcess(pChild);
+else
+++successCount; // only counts if the whole chain completed
+break;
+}
+case Process::FAILED :
+{
+pCurrProcess->VOnFail();
+++failCount;
+break;
+}
+case Process::ABORTED :
+{
+pCurrProcess->VOnAbort();
+++failCount;
+break;
+}
+}
+// remove the process and destroy it
+m_processList.erase(thisIt);
+}class DelayProcess : public Process
+{
+unsigned long m_timeToDelay;
+unsigned long m_timeDelayedSoFar;
+public:
+explicit DelayProcess(unsigned long timeToDelay);
+protected:
+virtual void OnUpdate(unsigned long deltaMs);
+};
+DelayProcess::DelayProcess(unsigned long timeToDelay)
+{
+m_timeToDelay = timeToDelay;
+m_timeDelayedSoFar = 0;
+}
+void DelayProcess::OnUpdate(unsigned long deltaMs)
+{
+m_timeDelayedSoFar += deltaMs;
+if (m_timeDelayedSoFar >= m_timeToDelay)
+Succeed();
+}
+Here’s how you create an instance of DelayProcess :
+StrongProcessPtr pDelay(new DelayProcess(3000)); // delay for 3 seconds
+processManager.AttachProcess(pDelay);
+}class DelayProcess : public Process
+{
+unsigned long m_timeToDelay;
+unsigned long m_timeDelayedSoFar;
+public:
+explicit DelayProcess(unsigned long timeToDelay);
+protected:
+virtual void OnUpdate(unsigned long deltaMs);
+};
+DelayProcess::DelayProcess(unsigned long timeToDelay)
+{
+m_timeToDelay = timeToDelay;
+m_timeDelayedSoFar = 0;
+}
+void DelayProcess::OnUpdate(unsigned long deltaMs)
+{
+m_timeDelayedSoFar += deltaMs;
+if (m_timeDelayedSoFar >= m_timeToDelay)
+Succeed();
+}
+Here’s how you create an instance of DelayProcess :
+StrongProcessPtr pDelay(new DelayProcess(3000)); // delay for 3 seconds
+processManager.AttachProcess(pDelay);
+return ((successCount << 16) | failCount);
+}
+
+class DelayProcess : public Process
+{
+unsigned long m_timeToDelay;
+unsigned long m_timeDelayedSoFar;
+public:
+explicit DelayProcess(unsigned long timeToDelay);
+protected:
+virtual void OnUpdate(unsigned long deltaMs);
+};
+DelayProcess::DelayProcess(unsigned long timeToDelay)
+{
+m_timeToDelay = timeToDelay;
+m_timeDelayedSoFar = 0;
+}
+void DelayProcess::OnUpdate(unsigned long deltaMs)
+{
+m_timeDelayedSoFar += deltaMs;
+if (m_timeDelayedSoFar >= m_timeToDelay)
+Succeed();
+}
+Here’s how you create an instance of DelayProcess :
+StrongProcessPtr pDelay(new DelayProcess(3000)); // delay for 3 seconds
+processManager.AttachProcess(pDelay);
+
+class RealtimeProcess : public Process
+{
+protected:
+HANDLE m_hThread;
+DWORD m_ThreadID;
+int m_ThreadPriority;
+public:
+// Other prioities can be:
+// THREAD_PRIORITY_ABOVE_NORMAL
+// THREAD_PRIORITY_BELOW_NORMAL
+// THREAD_PRIORITY_HIGHEST
+// THREAD_PRIORITY_TIME_CRITICAL
+// THREAD_PRIORITY_LOWEST
+// THREAD_PRIORITY_IDLE
+//
+RealtimeProcess( int priority = THREAD_PRIORITY_NORMAL )
+: Process(PROC_REALTIME)
+{
+m_ThreadID = 0;
+m_ThreadPriority = priority;
+}
+virtual ~RealtimeProcess() { CloseHandle(m_hThread); }
+static DWORD WINAPI ThreadProc ( LPVOID lpParam );
+protected:
+virtual void VOnInit();
+virtual void VOnUpdate(unsigned long deltaMs) { }
+virtual void VThreadProc(void) = 0;
+};
+
+
+VOnInit() is where the call to CreateThread() happens:
+void RealtimeProcess::VOnInit(void)
+{
+Process::VOnInit();
+m_hThread = CreateThread(
+NULL,
+// default security attributes
+0,
+// default stack size
+ThreadProc, // thread process
+this,
+// thread parameter is a pointer to the process
+0,
+// default creation flags
+&m_ThreadID); // receive thread identifier
+if( m_hThread == NULL )
+{Multithreading Classes in GameCode4
+GCC_ERROR(“Could not create thread!”);
+Fail();
+return;
+}
+SetThreadPriority(m_hThread, m_ThreadPriority);
+}
+DWORD WINAPI RealtimeProcess::ThreadProc( LPVOID lpParam )
+{
+RealtimeProcess *proc = static_cast<RealtimeProcess *>(lpParam);
+proc->VThreadProc();
+return TRUE;
+}

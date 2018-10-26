@@ -1,0 +1,2 @@
+gcc porgamain.cpp  -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system -lGLU -lGL -lglut -L/usr/lib64 -lstdc++ -o outputfilenae
+

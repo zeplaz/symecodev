@@ -1,0 +1,360 @@
+y=1/((1+(1-x))*x)//dx'= (2x-2)/(x^4-4x^3+4x^2)//dx''=-(6x^2-12x+8)/(x^6-6x^5+12x^4-8x^3)
+
+y=1/((1+(-x))*x)//dx'=2x-1/(x^4-2x^3+x^2)//dx''=-(6x^2-6x+2)/(x^6-3x^5+3x^4-x^3)//
+
+
+y=1/(1+(-x)*x/y)// dx' = 1/((x^2-2x+1)y)//
+
+
+line-box inters
+fy=       (Py-V0y)/V1-V0y
+fx=(Px-V0x)/(v
+
+
+B=V1-V0
+
+I=V0+B(f)
+
+euler
+sin(TH)=y/1
+cos(TH)x/1
+
+Vx=cos(y)cos(p)
+Vy=sin(p)
+Vz=sin(y)cos(p)
+
+
+/V=faceing
+
+class Vector;
+
+Class EAngle
+{
+public:
+Eangle()
+{p=y=r=0;}
+
+EAngle(float pitch, float yaw, float roll)
+{
+p=pitch;
+y=yaw;
+r=roll;
+}
+
+Vector ToVector() const;
+void Normalize();
+
+float p;
+float y;
+float r; 
+
+}
+
+#include <vector.h?>
+#include<cmath>
+Vector EAngle::ToVector()const
+{
+
+Vector result;
+result.x=cos(y)*cos(p);
+result.y = sin(p);
+result.z = sin(y)cos(p);
+
+return result;
+
+
+}
+
+
+void EAngle::Normalize()
+{
+if (p>89)
+p=89;
+if (p<-89)
+p=-89;
+
+
+while (y<-180)
+y +=360;
+while (y>360)
+y-=360;
+
+}
+
+
+
+int iMouseMovedx =x-m_ilastMouseX; 
+int
+float flSensitivty =0.01f;
+
+
+box.angvlew.y +=iMouseMovedx *flSensitivty 
+
+box.angView.Normailze();
+
+
+
+
+
+
+
+#pragma once
+#include "vector.h"
+
+class AABB
+{
+Public:
+
+AABB operator +(const Point&p const) 
+ 
+{
+AABB result = (*this);
+result.vecMin = p+vecMin;
+result.vecMax =p + vecMax; 
+
+}
+
+public:
+Vector vecMin;
+Vector vecMax;
+
+};
+
+
+
+
+
+
+
+#pragma once
+
+class Vector;
+class AABB;
+
+bool LineAABBIntersection(const AABB& aabbBox, const Vector& v0, const Vector& v1, Vector& vecIntersection, float& flFraction);
+
+
+
+
+
+
+class collision
+
+#include<algorithm>
+#include <collision>
+
+
+#include <aabb.h>
+#include <vector.h>
+
+
+using std::swap;
+using std::min;
+using std::max;
+
+
+
+bool ClipLine(int d, const AABB& aabbBox, const Vector& v0, const Vector& v1, float& f_low, float& f_high)
+{
+	// f_low and f_high are the results from all clipping so far. We'll write our results back out to those parameters.
+
+	// f_dim_low and f_dim_high are the results we're calculating for this current dimension.
+	float f_dim_low, f_dim_high;
+
+	// Find the point of intersection in this dimension only as a fraction of the total vector 
+	f_dim_low = (aabbBox.vecMin.v[d] - v0.v[d])/(v1.v[d] - v0.v[d]);
+	f_dim_high = (aabbBox.vecMax.v[d] - v0.v[d])/(v1.v[d] - v0.v[d]);
+
+	// Make sure low is less than high
+	if (f_dim_high < f_dim_low)
+		swap(f_dim_high, f_dim_low);
+
+	// If this dimension's high is less than the low we got then we definitely missed. 
+	if (f_dim_high < f_low)
+		return false;
+
+	// Likewise if the low is less than the high.
+	if (f_dim_low > f_high)
+		return false;
+
+	// Add the clip from this dimension to the previous results 
+	f_low = max(f_dim_low, f_low);
+	f_high = min(f_dim_high, f_high);
+
+	if (f_low > f_high)
+		return false;
+
+	return true;
+}
+
+
+
+
+
+
+
+
+
+
+bool LineAABBIntersection(const AABB& aabbBox, const Vector& v0, const Vector& v1,
+Vector&  vecIntersection, float& flFraction)
+{
+
+float f_low=0;
+float f_high=1;
+
+Vector b= v1-v0;
+
+vecIntersection = v0+b*f_low
+flFraction = f_low; 
+
+}
+
+
+bool 
+
+{f_dim_low = 
+
+
+}
+
+
+
+
+
+
+#pragma once
+
+class Vector
+{
+public:
+	Vector() {}
+	Vector(float X, float Y, float Z)
+	{
+		x = X;
+		y = Y;
+		z = Z;
+	}
+	Vector(const class Point& p);
+
+	float Length() const;
+	float LengthSqr() const;
+
+	Vector operator-() const;
+
+	Vector operator+(const Vector& v) const;
+	Vector operator-(const Vector& v) const;
+
+	Vector operator*(float s) const;
+	Vector operator/(float s) const;
+
+	Vector Normalized() const;
+	void Normalize();
+
+	float  Dot(const Vector& v) const;
+	Vector Cross(const Vector& v) const;
+
+public:
+	union {
+		struct {
+			float x, y, z;
+		};
+		float v[3];
+	};
+};
+
+class Point
+{
+public:
+	Point() {}
+	Point(float X, float Y, float Z)
+	{
+		x = X;
+		y = Y;
+		z = Z;
+	}
+
+	Point(const Vector& v)
+	{
+		x = v.x;
+		y = v.y;
+		z = v.z;
+	}
+
+	Point operator+(const Vector& v) const;
+	Point operator-(const Vector& v) const;
+
+	float x, y, z;
+};
+
+
+
+
+
+
+#pragma once
+
+class Vector
+{
+public:
+	Vector() {}
+	Vector(float X, float Y, float Z)
+	{
+		x = X;
+		y = Y;
+		z = Z;
+	}
+	Vector(const class Point& p);
+
+	float Length() const;
+	float LengthSqr() const;
+
+	Vector operator-() const;
+
+	Vector operator+(const Vector& v) const;
+	Vector operator-(const Vector& v) const;
+
+	Vector operator*(float s) const;
+	Vector operator/(float s) const;
+
+	Vector Normalized() const;
+	void Normalize();
+
+	float  Dot(const Vector& v) const;
+	Vector Cross(const Vector& v) const;
+
+public:
+	union {
+		struct {
+			float x, y, z;
+		};
+		float v[3];
+	};
+};
+
+class Point
+{
+public:
+	Point() {}
+	Point(float X, float Y, float Z)
+	{
+		x = X;
+		y = Y;
+		z = Z;
+	}
+
+	Point(const Vector& v)
+	{
+		x = v.x;
+		y = v.y;
+		z = v.z;
+	}
+
+	Point operator+(const Vector& v) const;
+	Point operator-(const Vector& v) const;
+
+	float x, y, z;
+};
+
+
+

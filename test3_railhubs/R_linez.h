@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 class R_linez : public entity
-
+{
 private:
 
 R_lines(railhubz& hub1, railhubz& hub2) : initialize();
@@ -17,6 +17,8 @@ float RL_x1  =0.f;
 float RL_y1 =0.f;
 loat RL_x2  =0.f;
 float RL_y2 =0.f;
+
+bool AcessArray[4]={false};
 
 
 void draw(sf::RenderWindow &window,int& total_R_linez);
@@ -32,3 +34,4 @@ void initialize();
 }
 void *recivemsg();
 update_line();
+}

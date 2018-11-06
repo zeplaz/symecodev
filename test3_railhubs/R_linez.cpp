@@ -1,21 +1,22 @@
 
-#inlcude "R_linez.h"
 
 
-~R_linez(){
+#include "R_linez.h"
 
 
-}
+R_linez::~R_linez(){}
 
-R_linez::R_linez (railhubz& hub1, railhubz& hub2, int& total_R_linez)
+
+R_linez::R_linez(const railhubz&, int& total_R_linez) //(const railhubz& hub1, const railhubz& hub2, int& total_R_linez)
 {
+
      line_id = total_R_linez+1;
      total_R_linez++;
 
-    rail_linez_array[0].position = hub1.hub_location;
+    rail_linez_array[0].position = hub_1.hub_location;
     rail_linez_array[0].color  = sf::Color::Blue;
 
-    rail_linez_array[1].position = hub2.hub_location;
+    rail_linez_array[1].position = hub_2.hub_location;
     rail_linez_array[1].color  = sf::Color::Blue;
 
 }

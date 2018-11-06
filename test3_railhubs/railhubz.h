@@ -1,8 +1,6 @@
 #ifndef RAILHUBZ_H
 #define RAILHUBZ_H
-/*sf::time micros
-*/
-//orgianclock.restart();
+
 
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
@@ -22,7 +20,8 @@ protected:
 time_t H_creation_t;
                             //int numberofRouts =0;
 sf::CircleShape cr_hubgraphic;
-sf::Vector2f* hub_location;                               /*
+sf::Vector2f* hub_location;
+                          /*
                                     struct routs {
                                     int* rout_id;
                                     int active;
@@ -41,7 +40,7 @@ public:
     int id;
 
 
-    void draw(sf::RenderWindow &window,int& totalhubs);
+    void draw(sf::RenderWindow &window);
 
 
 

@@ -1,10 +1,10 @@
 
-/*sf::time micros
-*/
+
 #include "railhubz.h"
 
+railhubz::~railhubz(){}
 
-railhubz::railhubs(time_t& orgin, sf::Vector2f hub_l, int& totalhubs)
+railhubz::railhubz(time_t& orgin, sf::Vector2f hub_l, int& totalhubs)
 {
     id = totalhubs+1;
     totalhubs++;
@@ -12,13 +12,13 @@ railhubz::railhubs(time_t& orgin, sf::Vector2f hub_l, int& totalhubs)
                 //        float px=x;
                     //float px=y;
 
-        h_creation_t = clock()-orgin;
-        hub_location = *hub_l;
+        H_creation_t = clock()-orgin;
+        hub_location = &hub_l;
 
 //graphics
-    cr_hubgraphic.setRatios(20.f);
-    cr_hubgraphic.setPosition(*hub_l);
-    cr_hubgraphic.setColor(sf::Color::Green);
+    cr_hubgraphic.setRadius(20.f);
+    cr_hubgraphic.setPosition( *hub_location);
+    cr_hubgraphic.setFillColor(sf::Color::Green);
 
                                 //struct routs deflut;
                                         //    defult.active =0;
@@ -28,18 +28,19 @@ railhubz::railhubs(time_t& orgin, sf::Vector2f hub_l, int& totalhubs)
 }
 sf::Vector2f* railhubz::getLocation()
 {
-    return(hub_location) ;
+    return(hub_location);
 }
 
-railhubz::put_train_on_line()
+bool railhubz::put_train_on_line()
 {
 
 }
 
-railhubz::draw(sf::RenderWindow &window,int& totalhubs)
+void railhubz::draw(sf::RenderWindow &window)
 {
-for (int i = 0; i<totalhubs ; i++)
-    {window.draw(railhubz.id[i]); }
+
+
+    window.draw(cr_hubgraphic);
 }
 
 

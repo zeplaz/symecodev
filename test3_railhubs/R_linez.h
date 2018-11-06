@@ -2,7 +2,16 @@
 
 #pragma once
 #include <SFML/Graphics.hpp>
+ #include <SFML/Window.hpp>
 
+#include "trainz.h"
+#include "railhubz.h"
+#include "R_linez.h"
+
+#include <time.h>
+#include <stack>
+
+                            class railhubz;
 template <typename T> float sgn(T val) {
     return (T(0) < val) - (val < T(0));
 }
@@ -20,9 +29,13 @@ sf::VertexArray rail_linez_array;
 float AcessArray_Drection=0;
 bool AcessArray_channels[2] = {false};
 
+//railhubz* rOrign_Station;
+//railhubz* rDestination_station;
+
 public:
     int line_id;
-
+R_linez( const railhubz&, int& total_R_linez);
+    //R_linez(const railhubz::railhubz& hub_start, const railhubz::railhubz& Hub_dest, int& total_trainz);
     //R_linez (railhubz&, railhubz&, int&);
     //: initialize();
 
@@ -33,7 +46,6 @@ void draw(sf::RenderWindow &window,int& total_R_linez);
 
 bool can_add_train();
 
-R_linez(railhubz* hub_start, railhubz* Hub_dest, int& total_trainz);
 
 //getstatus();
 //void initialize();

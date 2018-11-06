@@ -1,11 +1,14 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+
 #include "railhubz.h"
 #include "R_linez.h"
+
 #include <time.h>
 #include <stack>
- #include <SFML/Window.hpp>
-class Tranz
+
+class trainz
 
 {
 private:
@@ -54,9 +57,8 @@ std::stack<sf::RectangleShape*>  cargoz;
 
 
 public:
-
- trainz(railhubz* hub_start, railhubz* Hub_dest, int& total_trainz);
-
+    trainz();
+ trainz(const railhubz& hub_start, const railhubz& Hub_dest, int& total_trainz);
 
  ~trainz();
 

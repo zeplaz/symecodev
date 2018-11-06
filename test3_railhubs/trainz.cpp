@@ -1,6 +1,7 @@
 //Trainz.cpp
 
-trainz::trainz(railhubz* hub_start, railhubz* Hub_dest, int& total_trainz)
+#include "trainz.h"
+trainz::trainz(const railhubz& hub_start, const railhubz& Hub_dest, int& total_trainz)
 {
     Train_id =  total_trainz+1;
     total_trainz++;

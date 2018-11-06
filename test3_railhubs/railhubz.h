@@ -6,21 +6,22 @@
 
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
+
 #include <time.h>
 #include <vector>
+#include <queue>
 #include "trainz.h"
 #include "R_linez.h"
 class railhubz
 
 {
-
-protected :
+protected:
         //sf::Clock hubclock;
         //    sf:Time elapsehub;
             //float px, py;
 time_t H_creation_t;
                             //int numberofRouts =0;
-sf::Circle cr_hubgraphic;
+sf::CircleShape cr_hubgraphic;
 sf::Vector2f* hub_location;                               /*
                                     struct routs {
                                     int* rout_id;
@@ -29,39 +30,37 @@ sf::Vector2f* hub_location;                               /*
                                     int* ForignHub_ID;
 
                                 }; */
-vector<linez*> line_connections;
-
+std::vector<R_linez*> line_connections;
+//std::queue<trainz> trains_waiting;
 
 
 public:
 
-    railhubz(time_t& orgin, sf::Vector2f& hub_l, int& totalhubs);
+    railhubz(time_t& orgin, sf::Vector2f hub_l, int& totalhubs);
     ~railhubz();
     int id;
 
 
     void draw(sf::RenderWindow &window,int& totalhubs);
-    {
-    for (int i = 0; i<totalhubs ; i++)
-        {window.draw(hubz[i] ); }
-    }
+
 
 
 bool put_train_on_line();
 
-int addtrain(trainz& newtrain, int&rout_Id);
-R_linez add_line();
+sf::Vector2f* getLocation();
+
+//R_linez add_line();
 
 
 
-
-   getelapzed();
+/*
+            getelapzed();
           {
             elapsehub =orgianclock.getElapsedTime();
             return (elapsehub);
             };
 
-                /* int*  createNewRout(int& Forignhub_id);
+                int*  createNewRout(int& Forignhub_id);
                 void  terminaterRout(int&rout_Id);
                 void   getrouts(int&rout_Id, int&,int&,int&);
     //      updaterouts();

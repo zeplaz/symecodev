@@ -6,18 +6,22 @@
 
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-
+#include <time.h>
+#include <vector>
+#include "trainz.h"
+#include "R_linez.h"
 class railhubz
 
 {
 
 protected :
-sf::Clock hubclock;
-sf:Time elapsehub;
-float px, py;
-int numberofRouts =0;
+        //sf::Clock hubclock;
+        //    sf:Time elapsehub;
+            //float px, py;
+time_t H_creation_t;
+                            //int numberofRouts =0;
 sf::Circle cr_hubgraphic;
-                                /*
+sf::Vector2f* hub_location;                               /*
                                     struct routs {
                                     int* rout_id;
                                     int active;
@@ -25,33 +29,42 @@ sf::Circle cr_hubgraphic;
                                     int* ForignHub_ID;
 
                                 }; */
+vector<linez*> line_connections;
+
+
 
 public:
-    railhubz(sf::Time& orgenz, float x, float y);
-    ~railhubz();
 
-  int* id;
+    railhubz(time_t& orgin, sf::Vector2f& hub_l, int& totalhubs);
+    ~railhubz();
+    int id;
+
+
     void draw(sf::RenderWindow &window,int& totalhubs);
     {
     for (int i = 0; i<totalhubs ; i++)
         {window.draw(hubz[i] ); }
     }
 
-}
-    //      updaterouts();
 
-     int*  createNewRout(int& Forignhub_id);
-    void  terminaterRout(int&rout_Id);
-    void   getrouts(int&rout_Id, int&,int&,int&);
+bool put_train_on_line();
 
-    int addtrain(int drection , int&rout_Id, sf::Time&, sf::Clock&);
+int addtrain(trainz& newtrain, int&rout_Id);
+R_linez add_line();
 
-          sf::Time getelapzed();
+
+
+
+   getelapzed();
           {
             elapsehub =orgianclock.getElapsedTime();
             return (elapsehub);
             };
 
-
+                /* int*  createNewRout(int& Forignhub_id);
+                void  terminaterRout(int&rout_Id);
+                void   getrouts(int&rout_Id, int&,int&,int&);
+    //      updaterouts();
+                */
 };
 #endif

@@ -6,7 +6,7 @@
 #include <memory>
 #include <vector>
 #include <SFML/Graphics.hpp>
-
+#include <time.h>
 #include "States/StateBase.h"
 
 class symloop
@@ -14,6 +14,8 @@ class symloop
 {
 public:
     symlop()
+    time_t current_t;
+    clock_t Orgin_t;
 
     template <typename T, typename... Args>
 
@@ -25,7 +27,7 @@ public:
         void handleEvents();
         void tryPop_st();
 
-        StateBase& getCurrentState
+        StateBase& getCurrentState;
 
         sf::RenderWindow PRIM_window;
 
@@ -33,6 +35,8 @@ std::vector<std::unique_ptr<StateBase> sym_states;
 
         bool Sym_shouldPop = false;
 };
+
+
 
 template <typename T, typename... Args>
 void symlop::pushState()
@@ -62,14 +66,16 @@ symlop::run()
  unsigned ticks =0;
 
 
+clock_t run_start_t = clock();
 
-sf::Clock run_clock;
-sf::Time last_chk_time
-sf::Tome elapsed;
+//sf::Clock run_clock;
+//sf::Time last_chk_time
+//sf::Time elapsed;
+
 
 { while (PRIM_window.isopen() && !Sym_states.empty())
-auto& deltatime = run_clock();
- auto& curr_state. = getCUrrentState();
+auto& deltatime = clock();
+ auto& curr_state. = getCurrentState();
 
 curr_state.handleInput();
 curr_state.update(deltatime);
@@ -85,6 +91,7 @@ curr_state.update(deltatime);
 
 }
 }
+
 
 
 void symlop::tryPop_st()

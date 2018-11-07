@@ -29,6 +29,7 @@ sf::Vector2f* hub_location;
                                     int* ForignHub_ID;
 
                                 }; */
+class R_linez;
 std::vector<R_linez*> line_connections;
 //std::queue<trainz> trains_waiting;
 
@@ -46,7 +47,7 @@ public:
 
 bool put_train_on_line();
 
-sf::Vector2f* getLocation();
+sf::Vector2f* getLocation() const;
 
 //R_linez add_line();
 

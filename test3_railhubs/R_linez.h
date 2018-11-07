@@ -3,6 +3,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
  #include <SFML/Window.hpp>
+ #include <SFML/System.hpp>
+ #include <SFML/OpenGL.hpp>
 
 #include "trainz.h"
 #include "railhubz.h"
@@ -18,8 +20,11 @@ template <typename T> float sgn(T val) {
 
 class R_linez // public entity
 {
-private:
-sf::VertexArray rail_linez_array;
+protected:
+    sf::VertexArray rail_linez_array;
+
+//sf::VertexArray rail_linez_array;
+ //
 
                                 float RL_x1  =0.f;
                                 float RL_y1 =0.f;
@@ -34,7 +39,7 @@ bool AcessArray_channels[2] = {false};
 
 public:
     int line_id;
-R_linez( const railhubz&, int& total_R_linez);
+R_linez(const railhubz& hub_1, const railhubz& hub_2, int& total_R_linez);
     //R_linez(const railhubz::railhubz& hub_start, const railhubz::railhubz& Hub_dest, int& total_trainz);
     //R_linez (railhubz&, railhubz&, int&);
     //: initialize();
@@ -42,7 +47,7 @@ R_linez( const railhubz&, int& total_R_linez);
     ~R_linez();
 
 
-void draw(sf::RenderWindow &window,int& total_R_linez);
+void draw(sf::RenderWindow &window);
 
 bool can_add_train();
 

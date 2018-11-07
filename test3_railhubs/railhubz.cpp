@@ -26,7 +26,7 @@ railhubz::railhubz(time_t& orgin, sf::Vector2f hub_l, int& totalhubs)
                                     //rout_id = new int[numberofRouts];
                                 //    numberofRouts++;
 }
-sf::Vector2f* railhubz::getLocation()
+sf::Vector2f* railhubz::getLocation() const
 {
     return(hub_location);
 }

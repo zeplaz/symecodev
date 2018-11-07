@@ -13,11 +13,11 @@ railhubz::railhubz(time_t& orgin, sf::Vector2f hub_l, int& totalhubs)
                     //float px=y;
 
         H_creation_t = clock()-orgin;
-        hub_location = &hub_l;
+        hub_location = hub_l;
 
 //graphics
     cr_hubgraphic.setRadius(20.f);
-    cr_hubgraphic.setPosition( *hub_location);
+    cr_hubgraphic.setPosition(hub_location);
     cr_hubgraphic.setFillColor(sf::Color::Green);
 
                                 //struct routs deflut;
@@ -26,7 +26,7 @@ railhubz::railhubz(time_t& orgin, sf::Vector2f hub_l, int& totalhubs)
                                     //rout_id = new int[numberofRouts];
                                 //    numberofRouts++;
 }
-sf::Vector2f* railhubz::getLocation() const
+sf::Vector2f railhubz::getLocation() const
 {
     return(hub_location);
 }

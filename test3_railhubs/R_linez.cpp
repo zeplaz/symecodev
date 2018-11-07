@@ -13,9 +13,11 @@ R_linez::R_linez(const railhubz& hub_1, const railhubz& hub_2, int& total_R_line
      line_id = total_R_linez+1;
      total_R_linez++;
 
-   sf::Vector2f temp1(*hub_1.getLocation());
-
-   sf::Vector2f temp2(*hub_2.getLocation());
+   sf::Vector2f temp1(hub_1.getLocation());
+float x = temp1.x;
+float y = temp1.y;
+printf("info about temp1 x %f y %f /n", x, y);
+   sf::Vector2f temp2(hub_2.getLocation());
 
                             if (temp2 ==sf::Vector2f(200.f,100.f))
                                 {std::cout <<"true temp2;" << std::endl; }

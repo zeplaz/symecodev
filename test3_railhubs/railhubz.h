@@ -20,7 +20,7 @@ protected:
 time_t H_creation_t;
                             //int numberofRouts =0;
 sf::CircleShape cr_hubgraphic;
-sf::Vector2f* hub_location;
+sf::Vector2f hub_location;
                           /*
                                     struct routs {
                                     int* rout_id;
@@ -47,7 +47,7 @@ public:
 
 bool put_train_on_line();
 
-sf::Vector2f* getLocation() const;
+sf::Vector2f getLocation() const ;
 
 //R_linez add_line();
 

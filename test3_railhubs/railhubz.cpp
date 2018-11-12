@@ -36,6 +36,13 @@ bool railhubz::put_train_on_line()
 
 }
 
+void railhubz::add_line_connection((R_linez& newline)
+{
+
+line_connections.push_back(newline);
+
+}
+
 void railhubz::draw(sf::RenderWindow &window)
 {
 

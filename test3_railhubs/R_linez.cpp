@@ -9,12 +9,12 @@ R_linez::~R_linez(){}
 
 
 R_linez::R_linez(const railhubz& hub_1,
-                 const railhubz& hub_2, int& total_R_linez): //(const railhubz& hub1, const railhubz& hub2, int& total_R_linez)
+                 const railhubz& hub_2, int& total_R_linez) //(const railhubz& hub1, const railhubz& hub2, int& total_R_linez)
 {
      line_id = total_R_linez+1;
      total_R_linez++;
 
-   sf::Vector2f temp1(hub_1.getLocation());
+  sf::Vector2f temp1(hub_1.getLocation());
 float x = temp1.x;
 float y = temp1.y;
 printf("info about temp1 x %f y %f /n", x, y);

@@ -44,6 +44,7 @@ public:
     void draw(sf::RenderWindow &window);
 
 
+void add_line_connection(R_linez& newline);
 
 bool put_train_on_line();
 

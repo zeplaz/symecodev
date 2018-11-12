@@ -10,9 +10,13 @@
 
 #include <cassert>
 
-class Base_TSym_entity;
+
 static const int window_Hight =640;
 static const int window_Width = 800;
+
+class Base_TSym_entity;
+class R_linez;
+class railhubz;
 
 #define sym_manger Sym_Map::Instance()
 

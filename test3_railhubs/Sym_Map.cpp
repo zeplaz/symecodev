@@ -9,7 +9,6 @@ Sym_Map* Sym_Map::Instance()
 static Sym_Map instance;
 return &instance;
 
-
 }
 
 float Sym_Map::get_cartesian_plane(bool H_1_W_0, float plane);
@@ -70,20 +69,18 @@ void Sym_Map::registerentity(Base_TSym_entity* newentity)
 
 
 void Sym_Map::addLinez(int& Line_id, R_linez& newRline)
-{   prthubz =    new int;
+{   //prthubz =    new int;
 
-        if (Line_id == NULL)
-        Line_id* = rail_linez+1;
+Rail_map.insert( std::pair<int,R_linez*>(Line_id,newRline) );
 
-      Rail_map[Line_id] = newRline;
-      rail_linez++;
-    }
+}
 
 
     void Sym_Map::add_hubz(int& hub_id,railhubz& newhub);
           {
+ Hubz_map.insert( std::pair<int,railhubz*>(hub_id,newhub) );
 
-              Hubz_map[hub_id] =newhub;
+
 
           }
 

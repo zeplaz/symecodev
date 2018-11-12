@@ -27,7 +27,9 @@ int main ()
 int total_trainz=0;
 int total_hubz =0;
 int total_linez=0;
+
 clock_t start_prog_t =clock();
+time_t currnttime = start_prog_t;
 
 sf::RenderWindow window (sf::VideoMode(window_Width,window_Hight), "Test_hub1");
 window.setFramerateLimit(60);
@@ -35,34 +37,38 @@ window.setFramerateLimit(60);
 
 sf::Vector2f sampevec(700.f, 100.f);
 sf::Vector2f sampevec2(200.f, 100.f);
-
 sf::Vector2f sampevec3(200.f, 600.f);
 
-time_t currnttime = start_prog_t;
 
 railhubz Toronto(currnttime,sampevec3,total_hubz);
 railhubz mtl(currnttime,sampevec,total_hubz);
-//printf("hubsmade id: %s \n",total_hubz );
 railhubz otw(currnttime,sampevec2,total_hubz);
-//printf("hubsmade id: %r\n",total_hubz );
+                                //railhubz mtl(currnttime, ,total_hubz );
+                            //printf("hubsmade id: %r\n",total_hubz );
+                            //printf("hubsmade id: %s \n",total_hubz );
+
 R_linez* mtl_ottaw = new R_linez(mtl, otw, total_linez);
 R_linez* otaw_Toronto = new R_linez(Toronto, otw, total_linez);
 
                     //R_linez otaw_Toronto(Toronto, otw, total_linez);
-
 sym_manger->Register_entity(mtl_ottaw);
 sym_manger->Register_entity(otaw_Toronto);
 
-//railhubz mtl(currnttime, ,total_hubz );
+
 
     while (window.isOpen())
     { sf::Event prevent;
 
 
 //update
+for (int i =0, total_trainz, i++)
+        {
 
+        }
+for (int i=0, total_linez,  i++)
+        {
 
-
+        }
 //
 
     while (window.pollEvent(prevent))

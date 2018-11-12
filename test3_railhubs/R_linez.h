@@ -21,8 +21,8 @@
 template <typename T> float sgn(T val) {
     return (T(0) < val) - (val < T(0));
 }
-class railhubz
 
+class railhubz
 
 class R_linez: public Base_Tsym_entity;
 {
@@ -48,7 +48,7 @@ bool AcessArray_channels[2] = {false};
 public:
     int line_id;
 R_linez(const railhubz& hub_1, const railhubz& hub_2,
-        int& total_R_linez):Base_TSym_entity(*total_R_linez);
+        int& total_R_linez):Base_TSym_entity(total_R_linez);
 
     //R_linez(const railhubz::railhubz& hub_start, const railhubz::railhubz& Hub_dest, int& total_trainz);
     //R_linez (railhubz&, railhubz&, int&);

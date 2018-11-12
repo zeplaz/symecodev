@@ -8,12 +8,18 @@
 #include <time.h>
 #include <stack>
 
-class trainz
 
+struct telegram;
+
+
+
+class trainz : public  Base_TSym_entity
 {
+
 private:
     int Train_id;
     int speed;
+    bool is_halt;
     sf::Vector2f* current_location;
 
     railhubz* Orign_Station;
@@ -47,24 +53,37 @@ private:
         //                };
 
 sf::VertexArray Triangle_train_engine();
-
 std::stack<sf::RectangleShape*>  cargoz;
 
             /*    for (int i = 0; i <=cargo.numberofCarts; i++ )
                     { cargoz.push(sf::RectangleShape* i = new sf::RectangleShape);
                         cargoz.top()-> setColour(Red);
                     } */
+void locationsetup()
 
 
 public:
-    trainz();
- trainz(const railhubz& hub_start, const railhubz& Hub_dest, int& total_trainz);
+    trainz(int id,int& total_trainz,const railhubz& hub_start, const railhubz& Hub_dest):
+         Base_TSym_entity(id), locationsetup()
+            {
+
+
+
+
+            }
+
+
 
  ~trainz();
 
+void hault();
+void move();
 //bool Enter_next();
 //void Leave_current();
+void update();
+void Handle_telagram(const telagram& msg);
 
+void update_location(time_t& currnttime);
 void draw(sf::RenderWindow &window);
 
 //void Get_info(int& T_id);

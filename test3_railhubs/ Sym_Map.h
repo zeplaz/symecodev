@@ -1,3 +1,6 @@
+//Sym_Map.h
+
+
 
 #pragma once
         //#include <SFML/Graphics.hpp>
@@ -5,58 +8,58 @@
 #include "R_linez.h"
 #include <map>
 
+#include <cassert>
+
+class Base_TSym_entity;
+#define sym_manger Sym_Map::Instance()
 
 class Sym_Map
 {
-private  :
+private:
 
-std::map<char,int>::iterator iter;
+typedef std::map<int,Base_TSym_entity*> entity_map;
 
-int hubz;
-int rail_linez;
-                        int M_id;
-char* name;
+private:
+
+entity_map inst_enity_map;
+
+Sym_Map(const Sym_Map&);
+sym_map& operator =(const sym_map&);
+
+
+    int hubz;
+    int rail_linez;
+    std::map<int,int*>::iterator iter;
+
+
+                                int it_id;
+                                int* it_thing;
 
                 //sf::Clock mapClock;
 
-std::map<int*,R_linez*> Rail_map;
-std::map<int*,railhubz*> Hubz_map;
+std::map<int,R_linez*> Rail_map;
+std::map<int,railhubz*> Hubz_map;
 
 public :
+static Sym_Map* Instance();
 
-    Sym_Map(); // deal with id latr.
+    Sym_Map();{} // deal with id latr.
 
 
     ~Sym_Map();
 
+void Register_entity(Base_TSym_entity* newentity);
+
+
+Base_TSym_entity* get_entity_via_id(int id)const;
+
+void removeenity(Base_TSym_entity ptr_entity);
+
+
 void addLinez(int& Line_id, R_linez& newRline);
-        {   prthubz =    new int;
 
-            if (Line_id == NULL)
-            Line_id* = rail_linez+1;
-
-          Rail_map[Line_id] = newRline;
-          rail_linez++;
-        }
 
 void add_hubz(int& hub_id,railhubz& newhub);
-      {
-
-          Hubz_map[hub_id] =newhub;
-
-      }
-
-}
-
-iter != map.end();
-// rewtrire constructor or run interal?
-
-railhubz Shrby(&rail_Inalz_clock, 0,0);
-railhubz MTL(&rail_Inalz_clock, 0,0);
-railhubz Ottaw(&rail_Inalz_clock, 0,0);
-railhubz TOR(&rail_Inalz_clock, 0,0);
 
 
-R_linez SHrb_MTL(&Shrby,&MTL);
-R_linez MTL_OTWA(&MTL, &Ottaw);
-R_linez OTAW_TORNTO(&Ottaw,&TOR);
+};

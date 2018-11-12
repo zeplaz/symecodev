@@ -16,7 +16,7 @@ class Menu
 public:
 Menu(float width, float hight);
 ~Menu();
-    void draw(sf::RenderWindow &window);
+    void draw(sf::RenderWindow& window);
     void MoveUp();
     void MoveDown();
     int GetPressedItem(){return selectedItemIindex;}

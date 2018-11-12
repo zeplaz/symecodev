@@ -5,20 +5,22 @@
 
 bool trainz::Handle_telagram (const telagram& msg)
 {
-    if (msg ==1)
-    { hault(); return (true); }//addself to que?}
-                if(msg == 0)
-                { Move();
-                    return (true);
+            if (msg == halt_cmd)
+                { hault();
+                return (true);
+                }//addself to que?}
 
-                    // move?
+            if(msg == move_cmd)
+                { Move();
+                return (true);
                 }
-return }
+return false;
+}
+
 void trainz::update()
 {       time_t currenttime = clock();
             //check_status();
             update_location(currenttime);
-
 }
 
 
@@ -29,19 +31,26 @@ trainz::hault()
 
 trainz::move()
 {
+
 is_halt = false;
 
 }
 
-trainz::update_location()
+trainz::update_location(time_t& currenttime)
 {
 if (is_halt = false)
-{  time_t currenttime = clock();
+{                           //time_t currenttime = clock();
     int vilocity =  currenttime*speed;
-    int     current_location.x
-    int     current_location.y
+    vector_math temp_vec1;
+
+        current_location.x
+        current_location.y
+
 
     current_location;
+
+
+
 // do vector math. move location and update
 
 }
@@ -49,7 +58,7 @@ if (is_halt = false)
 }
 
 
-trainz::trainz(int id, int& total_trainz, const railhubz& hub_start, const railhubz& Hub_dest )
+trainz::trainz(int& total_trainz, const railhubz& hub_start, const railhubz& Hub_dest )
 {
     Train_id =  total_trainz+1;
     total_trainz++;

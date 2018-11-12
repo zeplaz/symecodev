@@ -11,6 +11,9 @@
 #include <cassert>
 
 class Base_TSym_entity;
+static const int window_Hight =640;
+static const int window_Width = 800;
+
 #define sym_manger Sym_Map::Instance()
 
 class Sym_Map
@@ -41,6 +44,10 @@ std::map<int,R_linez*> Rail_map;
 std::map<int,railhubz*> Hubz_map;
 
 public :
+
+float get_cartesian_plane(bool H_1_W_0, float plane);
+
+
 static Sym_Map* Instance();
 
     Sym_Map();{} // deal with id latr.

@@ -12,6 +12,39 @@ return &instance;
 
 }
 
+float Sym_Map::get_cartesian_plane(bool H_1_W_0, float plane);
+{
+     float car_plane;
+
+     switch (H_1_W_0)
+     {
+        case true :
+            if (plane == (window_Hight/2)
+                car_plane=0;
+                break;
+            if (plane <= (window_Hight/2)
+                car_plane = (window_Hight/2)-plane;
+                break;
+            if (plane >= (window_Hight/2)
+                car_plane= plane-(plane/2);
+                break;
+
+        case false :
+            if (plane == (window_Width/2)
+                car_plane=0;
+                break;
+            if (plane <= (window_Width/2)
+                car_plane = (window_Width/2)-plane;
+                break;
+            if (plane >= (window_Width/2)
+                car_plane= plane-(plane/2);
+                break;
+        }
+
+    return car_plane;
+}
+
+
 
 Sym_Map* Sym_Map::get_entity_via_id(int id)const
 

@@ -27,7 +27,8 @@ class msg_dispatcher
 
         std::set<telagram> dispatch_time_que;
 
-        void call_receiver_transmit(Base_TSym_entity* prt_receiver, const telagram& tela);
+        void call_receiver_transmit(Base_TSym_entity* prt_receiver,
+                                    const telagram& tela);
 
         msg_dispatcher(){}
 

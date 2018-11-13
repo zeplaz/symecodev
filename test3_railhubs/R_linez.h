@@ -12,8 +12,8 @@
 #include "trainz.h"
 #include "railhubz.h"
 
-#include "etcz/msg_cmdz.h"
-#include "etcz/msg_dispatcher.h"
+#include "msg_cmdz.h"
+#include "msg_dispatcher.h"
 
 #include <time.h>
 #include <stack>

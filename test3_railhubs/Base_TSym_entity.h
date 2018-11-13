@@ -4,8 +4,8 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include <string>
-#include "messaging/telagram.h"
+
+#include "telagram.h"
 
 class Base_TSym_entity
 
@@ -13,23 +13,23 @@ class Base_TSym_entity
   private:
 
   int be_id;
-   static int be_NextValidID;
+  static int be_NextValidID;
 
 //testz the id.
 void set_id(int val);
 
 public :
 
-Base_TSym_entity(int id)
+ Base_TSym_entity(int be_id)
+    {set_id(be_id);}
 
-    {setID(id)}
+virtual ~Base_TSym_entity(){};
 
-virtual ~Base_TSym_entity(){}
+virtual void update()= 0;
 
-virtual void update()=0;
+virtual  bool Handle_telagram(const telagram& tela)= 0;
 
-virtual void bool Handle_telagram(const telagram& msg)=0;
 
-int ID()const{return be_ID;}
+int ID()const{return be_id;}
 };
 #endif

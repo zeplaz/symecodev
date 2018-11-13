@@ -1,7 +1,7 @@
 
 #include "msg_dispatcher.h"
 #include "base_TSym_entity.h"
-#include "Sym_Map.h"
+#include "Smy_Map.h"
 #include "msg_cmdz.h"
 
 

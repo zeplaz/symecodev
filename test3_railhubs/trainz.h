@@ -66,7 +66,7 @@ int on_line_id = 0;
 int at_hub_id = 0;
 
 
-std::stack<sf::RectangleShape*>  cargoz;
+        //std::stack<sf::RectangleShape*>  cargoz;
 
             /*    for (int i = 0; i <=cargo.numberofCarts; i++ )
                     { cargoz.push(sf::RectangleShape* i = new sf::RectangleShape);

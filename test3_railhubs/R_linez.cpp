@@ -67,9 +67,9 @@ void R_linez::update()
 }
 
 
- bool R_linez::handle_msg(const telagram& msg)
+ bool R_linez::handle_msg(const telagram& tela)
 {
-        switch (msg);
+        switch (tela.msg);
         case enter_line1 :
 
             return true;

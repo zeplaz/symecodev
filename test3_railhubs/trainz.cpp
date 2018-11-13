@@ -3,14 +3,14 @@
 #include "trainz.h"
 
 
-bool trainz::Handle_telagram (const telagram& msg)
+bool trainz::Handle_telagram (const telagram& tela)
 {
-            if (msg == halt_cmd)
+            if (tela->msg == halt_cmd)
                 { hault();
                 return (true);
                 }//addself to que?}
 
-            if(msg == move_cmd)
+            if(tela->msg == move_cmd)
                 { Move();
                 return (true);
                 }

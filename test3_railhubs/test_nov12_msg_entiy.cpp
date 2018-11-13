@@ -13,6 +13,7 @@
 
     //#include "R_linez.h"
 #include "test_entity1.h"
+#include "railhubz.h"
 
 
 int main ()

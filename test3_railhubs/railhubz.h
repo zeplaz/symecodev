@@ -7,8 +7,11 @@
 
 #include <time.h>
 #include <vector>
-#include <queue>
-#include "trainz.h"
+#include "B_psTree.h"
+
+
+                         //#include <queue>
+//#include "trainz.h"
 #include "R_linez.h"
 class railhubz
 
@@ -21,7 +24,7 @@ time_t H_creation_t;
                             //int numberofRouts =0;
 sf::CircleShape cr_hubgraphic;
 sf::Vector2f hub_location;
-                          /*
+B_psTree Trainprotyque;                          /*
                                     struct routs {
                                     int* rout_id;
                                     int active;
@@ -30,6 +33,8 @@ sf::Vector2f hub_location;
 
                                 }; */
 class R_linez;
+                    //class Cmd_agent_operator;
+
 std::vector<R_linez*> line_connections;
 //std::queue<trainz> trains_waiting;
 
@@ -40,16 +45,20 @@ public:
     ~railhubz();
     int id;
 
+sf::Vector2f getLocation() const ;
 
-    void draw(sf::RenderWindow &window);
+
+line_map(railhub& Destination_station);
 
 
 void add_line_connection(R_linez& newline);
 
-bool put_train_on_line();
 
-sf::Vector2f getLocation() const ;
+void add_train_toque(trainz& traintoQues);
 
+void  put_priotytrain_on_line();
+
+void draw(sf::RenderWindow &window);
 //R_linez add_line();
 
 

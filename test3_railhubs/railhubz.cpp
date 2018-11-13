@@ -31,8 +31,10 @@ sf::Vector2f railhubz::getLocation() const
     return(hub_location);
 }
 
-bool railhubz::put_train_on_line()
+void railhubz::add_train_toque(trainz& traintoQues )
 {
+
+
 
 }
 
@@ -40,8 +42,16 @@ void railhubz::add_line_connection((R_linez& newline)
 {
 
 line_connections.push_back(newline);
+}
+
+
+bool railhubz::put_train_on_line()
+{
+
 
 }
+
+
 
 void railhubz::draw(sf::RenderWindow &window)
 {
@@ -49,6 +59,7 @@ void railhubz::draw(sf::RenderWindow &window)
 
     window.draw(cr_hubgraphic);
 }
+
 
 
 //R_linez railhubz::add_line()

@@ -13,7 +13,10 @@
 
 
 #include <time.h>
-#include <stack>
+                                //#include <stack>
+#include <cmath.h>
+
+#include <fstream>
 
 
 struct telagram;
@@ -25,14 +28,18 @@ class trainz : public  Base_TSym_entity
 {
 
 private:
-    int Train_id;
+
     int speed;
     bool is_halt;
+    float distance;
+
 
     sf::Vector2f current_location;
+    sf::Vector2f next_hub_location;
 
     railhubz* Orign_Station;
     railhubz* Destination_station;
+    railhubz* Next_hub;
 
     clock_t Orgin_t;
     time_t current_t;
@@ -61,7 +68,7 @@ private:
             //            { red_res1, magenta_res2, green_res3,
         //                };
 
-sf::VertexArray Triangle_train_engine();
+//sf::VertexArray Triangle_train_engine();
 int on_line_id = 0;
 int at_hub_id = 0;
 
@@ -72,16 +79,17 @@ int at_hub_id = 0;
                     { cargoz.push(sf::RectangleShape* i = new sf::RectangleShape);
                         cargoz.top()-> setColour(Red);
                     } */
-void locationsetup(railhubz& hub_str, railhubz& Hub_dst );
+void locationsetup(railhubz& hub_str, railhubz& next_hub );
 
 
 public:
+
+    double esclatcatator_priority;
+    int Train_id;
+
     trainz(int& total_trainz,const railhubz& hub_start,
      const railhubz& Hub_dest): Base_TSym_entity(total_trainz)
             {}
-
-
-
 
 
 
@@ -95,6 +103,7 @@ void update();
 virtual bool Handle_telagram(const telagram& msg);
 
 void update_location(time_t& currnttime);
+
 void draw(sf::RenderWindow &window);
 
 //void Get_info(int& T_id);

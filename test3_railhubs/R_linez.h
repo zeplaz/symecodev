@@ -16,7 +16,7 @@
 #include "msg_dispatcher.h"
 
 #include <time.h>
-#include <stack>
+
 
 template <typename T> float sgn(T val) {
     return (T(0) < val) - (val < T(0));

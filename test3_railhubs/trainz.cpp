@@ -7,6 +7,7 @@ bool trainz::Handle_telagram (const telagram& tela)
 {
             if (tela->msg == halt_cmd)
                 { hault();
+
                 return (true);
                 }//addself to que?}
 
@@ -40,13 +41,13 @@ trainz::update_location(time_t& currenttime)
 {
 if (is_halt = false)
 {                           //time_t currenttime = clock();
-    int vilocity =  currenttime*speed;
-    vector_math temp_vec1;
+    double vilocity =  currenttime*speed;
+        vector_math temp_vec1;
 
-        current_location.x
-        current_location.y
+        float cl_x1 = current_location.x
+        float cl_y1    =   current_location.y
 
-
+     // (cl_x1^2)+(cl_y1)
     current_location;
 
 
@@ -57,6 +58,22 @@ if (is_halt = false)
 
 }
 
+loaddata(&  t_org)
+
+{
+
+
+
+}
+
+trainz::Next_hub()
+
+{
+    Next_hub = Orign_Station->line_map(Destination_station);
+    next_hub_location = Next_hub->getLocation();
+
+}
+;
 
 trainz::trainz(int& total_trainz, const railhubz& hub_start, const railhubz& Hub_dest )
 {
@@ -69,8 +86,19 @@ trainz::trainz(int& total_trainz, const railhubz& hub_start, const railhubz& Hub
             current_location = Orign_Station->getLocation();
             Triangle_train_engine.SetPointColor(0, sf::Color::Blue);
             Triangle_train_engine.SetPointOutlineColor(0, sf::Color(0, 128, 128));
+
+            Next_hub = Orign_Station->line_map(Destination_station);
+
+            loaddata(Orgin_t);
+
+
+
+
+        distance = sqrt(((next_hub_location.x-current_location.x)^2)+
+                    next_hub_location.y-current_location.y)^2));
+
     //settime and other info
-    printf("new train added:ID %i %t \n", Train_id, *total_trainz);
+    printf("new train added:ID %s %t \n", Train_id, *total_trainz);
 
 }
 

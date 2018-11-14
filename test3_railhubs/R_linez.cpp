@@ -63,14 +63,11 @@ printf("info about temp1 x %f y %f /n", x, y);
 void R_linez::update()
 {
 
-
 }
 
 
  bool R_linez::handle_msg(const telagram& tela)
 {
-
-
 
 switch (tela.msg)
         {
@@ -82,26 +79,29 @@ switch (tela.msg)
         else
             {AcessArray_channels[1] =true};
 
-
-            telagram  cmd_telamove(0,this->line_id, train_on_line->id,
+            telagram  cmd_telamove(0,this->line_id, train_on_line->Train_id,
                            train_on_line->esclatcatator_priority , move_cmd);
-
                            this->Handle_telagram(cmd_telamove);
 
         }
         return true;
         break;
 
+    case exit_line :
 
-        case exit_line1 :
+            if (AcessArray_channels[1] ==true)
+                {AcessArray_channels[1] =false;
+                AcessArray_Drection[1] =0;
+                return true;
+                break;
+                }
 
-            return true;
-            break;
-
-        case exit_line2 :
-
-            return true;
-            break;
+            if (AcessArray_channels[1] ==false)
+                {AcessArray_channels[0]=  false;
+                AcessArray_Drection[0] =0;
+                return true;
+                break;
+                }
 
         case report_status :
 
@@ -109,7 +109,6 @@ switch (tela.msg)
 
             return true;
             break;
-
 
         default : return false;
 
@@ -136,12 +135,16 @@ bool R_linez::can_add_train_tochannel()
 {
 
 //if (sgn() == sgn(AcessArray_Drection) || sgn(AcessArray_Drection==0 )
-{       if (AcessArray_channels[0] = false && )
-                { AcessArray_channels[0] = true;
+{       if (AcessArray_channels[0] == false && AcessArray_channels[1] == false)
+                {
                 return true;
-            }
-        if (AcessArray_channels[1] = false)
-                AcessArray_channels[1] = true;
+                }
+
+        if (AcessArray_channels[0] == true && AcessArray_channels[1] == false)
+                //AcessArray_channels[1] = true;
+                //drection()
+
+                if (AcessArray_Drection[0]== )
                 return true;
                 }
     return false;

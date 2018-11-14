@@ -35,7 +35,7 @@ B_psTree Trainprotyque;                          /*
 class R_linez;
                     //class Cmd_agent_operator;
 
-std::vector<R_linez*> line_connections;
+std::vector<R_linez*>* line_connections;
 //std::queue<trainz> trains_waiting;
 
 
@@ -48,6 +48,9 @@ public:
 sf::Vector2f getLocation() const ;
 
 
+
+    std::vector<R_linez*>* list_linez();
+    
             line_map(railhub& Destination_station);
 
 

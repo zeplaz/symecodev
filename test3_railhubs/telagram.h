@@ -25,7 +25,7 @@ int sender;
 int receiver;
 int msg;
 double trazmission_t;
-int priority;
+float priority;
 void* Other_data;
 
 telagram():
@@ -36,8 +36,8 @@ telagram():
     msg(-1)
 {}
 
-telagram ( double time, int sender, int receiver, int msg,
-            int priority, void* data = NULL):
+telagram ( double time, int sender, int receiver, float priority, int msg,
+             void* data = NULL):
             trazmission_t(trazmission_t),
             sender(sender),
             receiver(receiver),
@@ -66,8 +66,16 @@ inline bool operator ==( const telagram& tela1, const telagram& tela2)
         {return false;}
 
 else {
-    return (tela1.priority<tela2.priority);
+        if (tela1.priority == -1)
+            {return false;}
+
+        if(tela2.priority == -1 )
+        {return true;}
+
+return (tela1.priority<tela2.priority);
+
 }
+
 }
 
 

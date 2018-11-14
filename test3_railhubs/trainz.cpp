@@ -8,14 +8,22 @@ bool trainz::Handle_telagram (const telagram& tela)
             if (tela->msg == halt_cmd)
                 { hault();
 
+
+                telagram  cmd_telaexit(0,this->Train_id,tela.sender,
+                               -1, exit_line);
+                               this->Handle_telagram(cmd_telaexit);
+                        
+
                 return (true);
+
                 }//addself to que?}
 
             if(tela->msg == move_cmd)
                 { Move();
                 return (true);
                 }
-return false;
+
+                return false;
 }
 
 void trainz::update()
@@ -62,8 +70,6 @@ loaddata(&  t_org)
 
 {
 
-
-
 }
 
 trainz::Next_hub()
@@ -79,7 +85,6 @@ trainz::trainz(int& total_trainz, const railhubz& hub_start, const railhubz& Hub
 {
     Train_id =  total_trainz+1;
     total_trainz++;
-
             Orgin_t = Clock();
             Orign_Station = hub_start;
             Destination_station = Hub_dest;

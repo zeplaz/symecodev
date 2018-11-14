@@ -39,7 +39,7 @@ private:
 
     railhubz* Orign_Station;
     railhubz* Destination_station;
-    railhubz* Next_hub;
+
 
     clock_t Orgin_t;
     time_t current_t;
@@ -83,7 +83,7 @@ void locationsetup(railhubz& hub_str, railhubz& next_hub );
 
 
 public:
-
+    railhubz* Next_hub;
     double esclatcatator_priority;
     int Train_id;
 

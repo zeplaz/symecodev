@@ -2,8 +2,7 @@
 #define MSG_TYPEZ
 
 
-enum msg_cmdz{enter_line1, enter_line2,
- exit_line1, exit_line2,report_status,halt_cmd,move_cmd};
+enum msg_cmdz{enter_line, exit_line,report_status,halt_cmd,move_cmd};
 
 
 #endif

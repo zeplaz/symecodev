@@ -20,6 +20,8 @@ railhubz::railhubz(time_t& orgin, sf::Vector2f hub_l, int& totalhubs)
     cr_hubgraphic.setPosition(hub_location);
     cr_hubgraphic.setFillColor(sf::Color::Green);
 
+
+
                                 //struct routs deflut;
                                         //    defult.active =0;
                                 //defult.drection =0;
@@ -31,10 +33,10 @@ sf::Vector2f railhubz::getLocation() const
     return(hub_location);
 }
 
-void railhubz::add_train_toque(trainz& traintoQues )
+void railhubz::add_train_toque(trainz* traintoQues )
 {
 
-
+Trainprotyque.insert(traintoQues->id,traintoQues.esclatcatator_priority);
 
 }
 
@@ -42,13 +44,25 @@ void railhubz::add_line_connection((R_linez& newline)
 {
 
 line_connections.push_back(newline);
+
+prt_mapz->routing->add_edge();
+line_connections
+
+
 }
 
 
-bool railhubz::put_train_on_line()
+bool railhubz::put_priotytrain_on_line()
 {
+    int temptrain_id;
+
+    temptrain_id = Trainprotyque.Highest_priorty()
 
 
+
+
+    //temptrain_id->move();
+    delet(Trainprotyque.Highest_priorty());
 }
 
 

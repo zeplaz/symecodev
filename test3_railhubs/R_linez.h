@@ -38,8 +38,8 @@ protected:
                                 float RL_y2 =0.f;
 
 
-float* AcessArray_Drection = new float[2]{0.f, 0.f};
-bool AcessArray_channels[2] = {false};
+int *AcessArray_Drection = new int[2]{0,0};
+bool *AcessArray_channels= new  bool[2] {false,false};
 
 
 //railhubz* rOrign_Station;

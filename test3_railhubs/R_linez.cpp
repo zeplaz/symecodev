@@ -69,16 +69,29 @@ void R_linez::update()
 
  bool R_linez::handle_msg(const telagram& tela)
 {
-        switch (tela.msg);
-        case enter_line1 :
 
-            return true;
-            break;
 
-        case enter_line2 :
 
-            return true;
-            break;
+switch (tela.msg)
+        {
+
+    case enter_line :
+    {
+        if (AcessArray_channels[0] ==false)
+            {AcessArray_channels[0] =true;}
+        else
+            {AcessArray_channels[1] =true};
+
+
+            telagram  cmd_telamove(0,this->line_id, train_on_line->id,
+                           train_on_line->esclatcatator_priority , move_cmd);
+
+                           this->Handle_telagram(cmd_telamove);
+
+        }
+        return true;
+        break;
+
 
         case exit_line1 :
 
@@ -112,6 +125,11 @@ void R_linez::draw(sf::RenderWindow &window)
 bool train_enter_line(trainz& train_on_line)
 
 {    //   if (train_on_line->current_location)
+
+railhubz* temprail_nexthub = train_on_line->next_hub;
+
+
+
 
 }
 bool R_linez::can_add_train_tochannel()

@@ -11,7 +11,7 @@
 
 class Cmd_agent_operator {
 
-
+AdjacencyMatrix* routmatrix;
 
 //class Sym_Map;
 
@@ -20,11 +20,32 @@ std::priority_queue<int> trainpriorty_master_que;
 
 Cmd_agent_operator();
 
-Drect_trains_next_rout(*Sym_Map prt_mapz);
 
-{
-    =prt_mapz->lookup_Routingmatrix();
+void setup_routmatrix(*Sym_Map prt_mapz);
 
+    {
+        std::vector<int> current_hublist = prt_mapz.hublist();
+
+        for (i=0 ; i <current_dispatch_hublist.size(); i++)
+    {
+        int temp_hub_id;
+        std::vector<R_linez*> temp_line_vec_ptr;
+
+            temp_hub_id = current_dispatch_hublist[i];
+            temp_line_vec_ptr = temp_hub_id.line_connections
+
+
+
+        }
+
+    }
+
+void Drect_trains_next_rout(*Sym_Map prt_mapz);
+
+{ AdjacencyMatrix* temp_martix;
+'
+'    temp_martix=prt_mapz->lookup_Routingmatrix();
+    AdjacencyMatrix->
 }
 
 scan_hubs_for_dispatch(*Sym_Map prt_mapz);

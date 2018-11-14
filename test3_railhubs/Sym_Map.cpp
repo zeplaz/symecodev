@@ -57,8 +57,7 @@ void Sym_Map::Register_hubz(railhubz* newhub);
       {
           Hubz_map.insert( std::pair<int,railhubz*>(newhub->id ,newhubz) );
           hubz++;
-          update_routingMatrix_add_hub();
-          
+                      
           }
 
 

@@ -8,7 +8,7 @@
 #include <time.h>
 #include <vector>
 #include "B_psTree.h"
-
+#include "Cmd_agent_operator.h"
 
                          //#include <queue>
 //#include "trainz.h"
@@ -48,7 +48,7 @@ public:
 sf::Vector2f getLocation() const ;
 
 
-line_map(railhub& Destination_station);
+            line_map(railhub& Destination_station);
 
 
 void add_line_connection(R_linez& newline);

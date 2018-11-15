@@ -27,44 +27,41 @@ railhubz::railhubz(time_t& orgin, sf::Vector2f hub_l, int& totalhubs)
                                     //rout_id = new int[numberofRouts];
                                 //    numberofRouts++;
 }
-sf::Vector2f railhubz::getLocation() const
-{
-    return(hub_location);
-}
+    sf::Vector2f railhubz::getLocation() const
+    {
+        return(hub_location);
+    }
 
-void railhubz::add_train_toque(trainz* traintoQues )
-{
+    void railhubz::add_train_toque(trainz* traintoQues )
+    {
+        Trainprotyque.insert(traintoQues->id,traintoQues.esclatcatator_priority);
+    }
 
-Trainprotyque.insert(traintoQues->id,traintoQues.esclatcatator_priority);
+    void railhubz::add_line_connection(R_linez& newline, Sym_Map& liv_map)
+    {
+        line_connections.push_back(newline);
 
-}
+        liv_map->routing->add_edge(newline->hub2);
+    //line_connections
+    }
 
-void railhubz::add_line_connection(R_linez& newline, Sym_Map& liv_map)
-{
+    int return_highest_prioty_train_id()
+    {
+        return (temptrain_id = Trainprotyque.Highest_priorty());
+    }
 
-line_connections.push_back(newline);
+    void railhubz::put_priotytrain_on_line()
+    {
+            //int temptrain_id;
+    //    temptrain_id = Trainprotyque.Highest_priorty()
+        //temptrain_id->move();
+        Trainprotyque.delet(Trainprotyque.Highest_priorty());
+    }
 
-liv_map->routing->add_edge(newline->hub2);
-//line_connections
-
-}
-
-
-bool railhubz::put_priotytrain_on_line()
-{
-    int temptrain_id;
-
-    temptrain_id = Trainprotyque.Highest_priorty()
-
-    //temptrain_id->move();
-    delet(Trainprotyque.Highest_priorty());
-}
-
-
-void railhubz::draw(sf::RenderWindow &window)
-{
-    window.draw(cr_hubgraphic);
-}
+    void railhubz::draw(sf::RenderWindow &window)
+    {
+         window.draw(cr_hubgraphic);
+    }
 
 
 

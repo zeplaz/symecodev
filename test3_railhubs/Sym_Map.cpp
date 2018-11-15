@@ -57,7 +57,7 @@ void Sym_Map::Register_hubz(railhubz* newhub);
       {
           Hubz_map.insert( std::pair<int,railhubz*>(newhub->id ,newhubz) );
           hubz++;
-                      
+
           }
 
 
@@ -114,6 +114,7 @@ void Sym_Map::Register_entity(Base_TSym_entity* newentity)
 {
 
     inst_enity_map.insert(std::make_pair(newentity->ID(),newentity));
+    
 }
 
 

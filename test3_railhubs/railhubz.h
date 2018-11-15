@@ -17,54 +17,50 @@ class railhubz
 
 {
 protected:
-        //sf::Clock hubclock;
-        //    sf:Time elapsehub;
+
             //float px, py;
+                        /*         //int numberofRouts =0;
+                                struct routs {
+                                int* rout_id;
+                                int active;
+                                int drection;
+                                int* ForignHub_ID;
+                            }; */
 time_t H_creation_t;
-                            //int numberofRouts =0;
+
 sf::CircleShape cr_hubgraphic;
 sf::Vector2f hub_location;
-B_psTree Trainprotyque;                          /*
-                                    struct routs {
-                                    int* rout_id;
-                                    int active;
-                                    int drection;
-                                    int* ForignHub_ID;
 
-                                }; */
 class R_linez;
                     //class Cmd_agent_operator;
 
 std::vector<R_linez*>* line_connections;
-//std::queue<trainz> trains_waiting;
-
+B_psTree Trainprotyque;
 
 public:
 
     railhubz(time_t& orgin, sf::Vector2f hub_l, int& totalhubs);
     ~railhubz();
+
     int id;
-
-sf::Vector2f getLocation() const ;
-
-
+    sf::Vector2f getLocation() const ;
 
     std::vector<R_linez*>* list_linez();
-    
-            line_map(railhub& Destination_station);
+
+                        //line_map(railhub& Destination_station);
+
+    void add_line_connection(R_linez& newline);
+
+    void add_train_toque(trainz& traintoQues);
+
+    //void remove_train_fromque();
+
+    int return_highest_prioty_train_id();
 
 
-void add_line_connection(R_linez& newline);
+    void  put_priotytrain_on_line();
 
-
-void add_train_toque(trainz& traintoQues);
-
-void  put_priotytrain_on_line();
-
-void draw(sf::RenderWindow &window);
-//R_linez add_line();
-
-
+    void draw(sf::RenderWindow &window);
 
 /*
             getelapzed();

@@ -35,7 +35,7 @@ private:
     typedef std::map<int,railhubz*> hub_map;
 
 private:
-    int hubz;
+    //int hubz;
     int rail_linez;
                                     //std::map<int,R_linez*> Rail_map;
 
@@ -59,13 +59,17 @@ public :
 
     ~Sym_Map(){delete *routing []; delete[] routing;}
 
+    int numberofentities()
+    {
+        return std::map.size();
+    }
 
     AdjacencyMatrix* lookup_Routingmatrix()
             { return *routing; }
 
     AdjacencyMatrix* create_routingMatrix()
     {
-            *routing = new AdjacencyMatrix(hubz);
+            *routing = new AdjacencyMatrix(hub_map.size());
             return *routing;
 
     }
@@ -73,11 +77,10 @@ public :
     AdjacencyMatrix* update_routingMatrix_add_hub()
     {
         delete *routing [];
-        *routing = new AdjacencyMatrix(hubz);
+        *routing = new AdjacencyMatrix(hub_map.size());
         return *routing;
 
     }
-
 
 
         void Register_hubz(railhubz* newhubz);

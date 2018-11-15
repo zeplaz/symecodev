@@ -3,70 +3,61 @@
 #pragma once
 //#include <algorithm>
 #include <map>
-
 #include <queue>
+
 #include "Sym_Map.h"
+#include "msg_dispatcher.h"
+
 #include "AdjacencyMatrix.h"
 
+#include "railhubz.h"
 
-class Cmd_agent_operator {
+#include "Base_TSym_entity.h"
+#include "R_linez.h"
+#include "trainz.h"
 
-AdjacencyMatrix* routmatrix;
+#include <time.h>
 
+enum hubNamez {Montreal,Toronto,QubecCity,Shebrooke,Ottowa};
+
+class R_lines;
+class trainz;
+class railhubz;
+
+class Cmd_agent_operator
+ {
+
+private:
+    AdjacencyMatrix* routmatrix;
 //class Sym_Map;
+    sid::vector<int> train_list;
+    std::priority_queue<int>* trainpriorty_master_que;
+//std::unordered_map<std::string, std::string>;
+    time_t cmd_time_start;
 
+public :
 
-std::priority_queue<int> trainpriorty_master_que;
+    int enity_count =0;
+    int train_count=0;
+    int hubz_count =0;
 
-Cmd_agent_operator();
+    Cmd_agent_operator(){cmd_time_start=clock();};
 
+    ~Cmd_agent_operator();
 
-void setup_routmatrix(*Sym_Map prt_mapz);
+    AdjacencyMatrix* setup_routmatrix();
 
-    {
-        std::vector<int> current_hublist = prt_mapz.hublist();
+    void dispatchtrain();
 
-        for (i=0 ; i <current_dispatch_hublist.size(); i++)
-    {
-        int temp_hub_id;
-        std::vector<R_linez*> temp_line_vec_ptr;
+    int check_cleanup_train_enityz();
 
-            temp_hub_id = current_dispatch_hublist[i];
-            temp_line_vec_ptr = temp_hub_id.line_connections
+    railhubz* Drect_trains_next_rout();
 
+    void scan_hubs_for_dispatch_cadiates();
 
+    void create_trainz(int numtraincreat, int priorty, int speed,
+                       int beinghub ,int endhub);
 
-        }
-
-    }
-
-void Drect_trains_next_rout(*Sym_Map prt_mapz);
-
-{ AdjacencyMatrix* temp_martix;
-'
-'    temp_martix=prt_mapz->lookup_Routingmatrix();
-    AdjacencyMatrix->
-}
-
-scan_hubs_for_dispatch(*Sym_Map prt_mapz);
-{
-  std::vector<int> current_dispatch_hublist = prt_mapz.hublist();
-for (i=0; i < current_dispatch_hublist.size(); i++)
-  {
-    std::vector<int>  merg_priority_Train_list;
-
-      temp_hub_id = current_dispatch_hublist[i]
-      temp_hub_id.
-
-
-  }
-
-
-}
-void dispatchtrain();
-
-~Cmd_agent_operator();
-
-
+    void create_hubz(int location);
 
 }

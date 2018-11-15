@@ -26,9 +26,10 @@ class trainz : public  Base_TSym_entity
 
 private:
 
-    int speed;
     bool is_halt;
-    float distance;
+    float distance_toNext_from_last;
+    float distance_traveld;
+    bool arid_f = false;
 
     sf::Vector2f current_location;
     sf::Vector2f next_hub_location;
@@ -39,29 +40,33 @@ private:
     clock_t Orgin_clock;
     time_t current_t;
 
-void locationsetup(railhubz& hub_str, railhubz& next_hub );
 
 public:
     railhubz* Next_hub;
-    double esclatcatator_priority;
+
     int Train_id;
+    double esclatcatator_priority;
+    int speed;
 
     trainz(int dispact_enity_id int& total_trainz,const railhubz& hub_start,
      const railhubz& Hub_dest): Base_TSym_entity(dispact_enity_id)
             {}
 
- ~trainz();
+     ~trainz();
 
-void hault();
-void move();
+    void hault();
+    void move();
+    bool  arived_final();
+
 //bool Enter_next();
 //void Leave_current();
-void update();
-virtual bool Handle_telagram(const telagram& msg);
+    void update();
 
-void update_location(time_t& currnttime);
+    void update_location(time_t& currnttime);
 
-void draw(sf::RenderWindow &window);
+    bool Handle_telagram(const telagram& tela);
+
+    void draw(sf::RenderWindow &window);
 
 //void Get_info(int& T_id);
 

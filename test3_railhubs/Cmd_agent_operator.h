@@ -18,7 +18,8 @@
 
 #include <time.h>
 
-enum hubNamez {Montreal,Toronto,QubecCity,Shebrooke,Ottowa};
+enum hubNamez {Shebrooke,Toronto,Montreal,QubecCity,Ottowa};
+
 
 class R_lines;
 class trainz;
@@ -38,14 +39,21 @@ private:
 public :
 
     int enity_count =0;
-    int train_count=0;
-    int hubz_count =0;
+    //int train_count=0;
+// int hubz_count =0;
+
+    int number_of_dispatches=0;
+    int numberofarrvails=0;
 
     Cmd_agent_operator(){cmd_time_start=clock();};
 
     ~Cmd_agent_operator();
 
     AdjacencyMatrix* setup_routmatrix();
+
+
+
+
 
     void dispatchtrain();
 

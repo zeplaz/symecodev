@@ -7,7 +7,7 @@
 
 AdjacencyMatrix* Cmd_agent_operator::setup_routmatrix()
 {
-    std::vector<int> current_hublist = prt_mapz.hublist();
+    std::vector<int> current_hublist = Sym_map->hublist();
     AdjacencyMatrix* temp_aj_matrix;
 
     for (i=0 ; i <current_dispatch_hublist.size(); i++)
@@ -65,15 +65,15 @@ Cmd_agent_operator::create_trainz(int numtraincreat, int priorty, int speed,
     for (i=0; i < numoftrains; i++ )
 
     {   trainz* temp_train = new trainz(enity_count,train_count,orginhub,destion);
-
         temp_train.load_data(priorty,speed);
         Sym_map->Register_entity(temp_train);
         train_list.push(temp_train->ID());
 
+
     }
 
 
-int Cmd_agent_operator::check_cleanup_train_enityz_arrival()
+void Cmd_agent_operator::check_cleanup_train_enityz_arrival()
 {
     trainz* temptrain;
 
@@ -82,8 +82,22 @@ int Cmd_agent_operator::check_cleanup_train_enityz_arrival()
         temptrain = sym_manger->get_entity_via_id(int train_list[i]);
 
         if (temptrain->arived_final())
-            {temptrain->removeenity();}
+            {temptrain->removeenity();
+            numberofarrvails++;
+            }
     }
+}
+
+
+
+Cmd_agent_operator::establish_link();
+{
+//
+    R_linez*Sherb_mtl =  new R_linez(mtl, otw, total_linez);
+    R_linez*
+    R_linez* mtl_ottaw = new R_linez(mtl, otw, total_linez);
+    R_linez* otaw_Toronto = new R_linez(Toronto, otw, total_linez);
+
 }
 
 

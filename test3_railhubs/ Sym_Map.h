@@ -22,8 +22,6 @@ class Base_TSym_entity;
 //class R_linez;
 //class railhubz;
 
-
-
 #define sym_manger Sym_Map::Instance()
 
 class Sym_Map

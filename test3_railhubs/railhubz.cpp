@@ -37,11 +37,10 @@ railhubz::railhubz(time_t& orgin, sf::Vector2f hub_l, int& totalhubs)
         Trainprotyque.insert(traintoQues->id,traintoQues.esclatcatator_priority);
     }
 
-    void railhubz::add_line_connection(R_linez& newline, Sym_Map& liv_map)
+    void railhubz::add_line_connection(R_linez& newline)
     {
         line_connections.push_back(newline);
-
-        liv_map->routing->add_edge(newline->hub2);
+        Sym_Map->routing->add_edge(newline->hub2);
     //line_connections
     }
 

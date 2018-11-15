@@ -114,10 +114,33 @@ void Sym_Map::Register_entity(Base_TSym_entity* newentity)
 {
 
     inst_enity_map.insert(std::make_pair(newentity->ID(),newentity));
-    
+
 }
 
+void draw_hubz(sf::RenderWindow& window)
+{
+    for(auto it = inst_enity_map.cbegin(); it != inst_enity_map.cend(); ++it)
+    {
+    railhubz* temphubz_Draw = it->second;
 
+    tempenity_Draw->draw(window);
+
+    }
+
+
+}
+
+void Draw_maped_enties(sf::RenderWindow& window)
+{
+
+for(auto it = inst_enity_map.cbegin(); it != inst_enity_map.cend(); ++it)
+    {
+    Base_TSym_entity* tempenity_Draw    = it->second;
+
+    tempenity_Draw->draw();
+
+    }
+}
 
 
 /*

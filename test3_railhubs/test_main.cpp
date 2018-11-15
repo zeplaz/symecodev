@@ -81,7 +81,7 @@ for (int i=0, total_linez,  i++)
                     glViewport(0, 0, prevent.size.width, prevent.size.height);
                 }
             }
-            window.clear();
+
 // draw
             //window.draw();
         //  window.draw();

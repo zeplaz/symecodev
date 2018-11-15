@@ -67,23 +67,23 @@ Cmd_agent_operator::create_trainz(int numtraincreat, int priorty, int speed,
     {   trainz* temp_train = new trainz(enity_count,train_count,orginhub,destion);
 
         temp_train.load_data(priorty,speed);
-
         Sym_map->Register_entity(temp_train);
         train_list.push(temp_train->ID());
 
     }
 
 
-int Cmd_agent_operator::check_cleanup_train_enityz(*Sym_Map prt_mapz)
+int Cmd_agent_operator::check_cleanup_train_enityz_arrival()
 {
     trainz* temptrain;
-    int cu_entiy_num;
-            cu_entiy_num = prt_mapz->
-    temptrain =get_entity_via_id(int id) const;
-get_hub_via_id prt_mapz->
-for (i=0; i< )
-    if ()
-    removeenity[i]
+
+    for (i=0; i<train_list.size(); i++ )
+    {
+        temptrain = sym_manger->get_entity_via_id(int train_list[i]);
+
+        if (temptrain->arived_final())
+            {temptrain->removeenity();}
+    }
 }
 
 

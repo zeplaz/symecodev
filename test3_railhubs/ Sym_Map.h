@@ -61,7 +61,7 @@ public :
 
     int numberofentities()
     {
-        return std::map.size();
+        return (inst_enity_map.size());
     }
 
     AdjacencyMatrix* lookup_Routingmatrix()

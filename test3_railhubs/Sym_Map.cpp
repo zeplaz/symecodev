@@ -6,141 +6,155 @@
 #include "Base_TSym_entity.h"
 //#include "Cmd_agent_operator.h"
 
-Sym_Map* Sym_Map::Instance()
-{
+    Sym_Map* Sym_Map::Instance()
+    {
+        static Sym_Map instance;
+        return &instance;
+    }
 
-static Sym_Map instance;
-return &instance;
-
-}
-createHubmartix();
-{
-
-}
-
-float Sym_Map::get_cartesian_plane(bool H_1_W_0, float plane)
-{
-     float car_plane;
-
-     switch (H_1_W_0)
-     {
-     case 0 :
-            if (plane == window_Hight/2)
-            {   car_plane =0 ;}
-
-            if (plane <= window_Hight/2)
-            {    car_plane = (window_Hight/2)-plane;}
-
-            if (plane >= window_Hight/2)
-            {  car_plane = plane-plane/2;
-             }
-            break;
-
-        case 1 :
-            if (plane == window_Width/2)
-                {car_plane=0;}
-
-            if (plane <= window_Width/2)
-                {car_plane = window_Width/2-plane ;}
-
-            if (plane >= window_Width/2)
-                {car_plane= plane-plane/2;}
-            break;
-
-        }
-
-    return car_plane;
-}
+    int ::numberofentities();
+    {
+        return (inst_enity_map.size());
+    }
 
 
-void Sym_Map::Register_hubz(railhubz* newhub);
+    void Sym_Map::Register_hubz(railhubz* newhub);
       {
           Hubz_map.insert( std::pair<int,railhubz*>(newhub->id ,newhubz) );
           hubz++;
+          H_path_matrixpo_map.insert(std::pair<int,int>(newhub->id,hubz));
+        }
 
-          }
-
-
-      void Sym_Map::remove_hubz(railhubz prt_hub);
+    void Sym_Map::remove_hubz(railhubz prt_hub);
       {
           Hubz_map.erase(Hubz_map.find(prt_hub->id));
-
+          hubz--;
       }
 
-
-      std::vector<int> Sym_Map::hublist()
+    std::vector<int> Sym_Map::hublist()
       {
           for(auto it = inst_hub_map.cbegin(); it != inst_hub_map.cend(); ++it)
           {
                      std::vector<int> hub_id_list ;
                      hub_id_list.pushback(it->first);
           }
-
           return  hub_id_list;
       }
 
-
-
-      railhubz* Sym_Map::get_hub_via_id(int id) const
-
+    railhubz* Sym_Map::get_hub_via_id(int id) const
       {
-      Hubz_map::const_iterator cons_itor =inst_hub_map.find(id);
+          Hubz_map::const_iterator cons_itor =inst_hub_map.find(id);
 
-      assert ((cons_itor != inst_hub_map.end()) && "<Sym_Map::get_hub_via_id>:ERROR");
-      return cons_itor->second;
+          assert ((cons_itor != inst_hub_map.end()) && "<Sym_Map::get_hub_via_id>:ERROR");
+          return cons_itor->second;
+      }
+
+     Base_TSym_entity* Sym_Map::get_entity_via_id(int id) const
+
+        {
+            entity_map::const_iterator cons_itor =inst_enity_map.find(id);
+            assert ((cons_itor != inst_enity_map.end()) && "<Sym_Map::get_entity_via_id>:ERROR");
+
+            return cons_itor->second;
+        }
+
+     void Sym_Map::removeenity(Base_TSym_entity* ptrentity)
+        {
+            inst_enity_map.erase(inst_enity_map.find(ptrentity->ID()));
+        }
+
+     void Sym_Map::Register_entity(Base_TSym_entity* newentity)
+        {
+            inst_enity_map.insert(std::make_pair(newentity->ID(),newentity));
+        }
+
+    void Sym_Map::draw_hubz(sf::RenderWindow& window)
+    {
+        for(auto it = inst_enity_map.cbegin(); it != inst_enity_map.cend(); ++it)
+        {
+            railhubz* temphubz_Draw = it->second;
+            tempenity_Draw->draw(window);
+        }
 
       }
 
-
-
-
-Base_TSym_entity* Sym_Map::get_entity_via_id(int id) const
-
-{
-entity_map::const_iterator cons_itor =inst_enity_map.find(id);
-
-assert ((cons_itor != inst_enity_map.end()) && "<Sym_Map::get_entity_via_id>:ERROR");
-return cons_itor->second;
-
-}
-
-void Sym_Map::removeenity(Base_TSym_entity* ptrentity)
-{
-inst_enity_map.erase(inst_enity_map.find(ptrentity->ID()));
-
-}
-
-void Sym_Map::Register_entity(Base_TSym_entity* newentity)
-{
-
-    inst_enity_map.insert(std::make_pair(newentity->ID(),newentity));
-
-}
-
-void draw_hubz(sf::RenderWindow& window)
-{
-    for(auto it = inst_enity_map.cbegin(); it != inst_enity_map.cend(); ++it)
+    void Sym_Map::Draw_maped_enties(sf::RenderWindow& window)
     {
-    railhubz* temphubz_Draw = it->second;
-
-    tempenity_Draw->draw(window);
-
+        for(auto it = inst_enity_map.cbegin(); it != inst_enity_map.cend(); ++it)
+            {
+                Base_TSym_entity* tempenity_Draw    = it->second;
+                tempenity_Draw->draw();
+            }
     }
 
+        void Sym_Map::inilize_hub_line_for_AMatrix(int hub_id, int outpost_id)
+        {
+            hub_path_matrixPos::const_iterator cons_itor =H_path_matrixpo_map.find(hub_id);
+            assert ((cons_itor != H_path_matrixpo_map.end()) &&
+             "<Sym_Map::H_path_matrixpo_map>:inilize_hub_lineERROR");
 
-}
+                hub_orgMatrx_location =cons_itor->second;
 
-void Draw_maped_enties(sf::RenderWindow& window)
-{
+            cons_itor =H_path_matrixpo_map.find(outpost_id);
+            assert ((cons_itor != H_path_matrixpo_map.end()) &&
+            "<Sym_Map::H_path_matrixpo_map>:inilize_hub_lineERROR");
 
-for(auto it = inst_enity_map.cbegin(); it != inst_enity_map.cend(); ++it)
-    {
-    Base_TSym_entity* tempenity_Draw    = it->second;
+                outpost_Matrx_location = cons_itor->second;
 
-    tempenity_Draw->draw();
+            *routing->add_edge(hub_orgMatrx_location,outpost_Matrx_location);
+            *routing->add_edge(outpost_Matrx_location,hub_orgMatrx_location);
+        }
 
-    }
-}
+        AdjacencyMatrix* Sym_Map::update_routingMatrix_add_hub()
+        {
+            delete *routing [];
+            *routing = new AdjacencyMatrix(hub_map.size());
+            return *routing;
+        }
+
+        AdjacencyMatrix* Sym_Map::lookup_Routingmatrix()
+        { return *routing; }
+
+        AdjacencyMatrix* Sym_Map::create_routingMatrix()
+        {
+            *routing = new AdjacencyMatrix(hub_map.size());
+            return *routing;
+        }
+
+
+                float Sym_Map::get_cartesian_plane(bool H_1_W_0, float plane)
+        {
+             float car_plane;
+
+             switch (H_1_W_0)
+             {
+            case 0 :
+                if (plane == window_Hight/2)
+                {   car_plane =0 ;}
+
+                if (plane <= window_Hight/2)
+                {    car_plane = (window_Hight/2)-plane;}
+
+                if (plane >= window_Hight/2)
+                {  car_plane = plane-plane/2;
+                 }
+                break;
+
+            case 1 :
+                if (plane == window_Width/2)
+                    {car_plane=0;}
+
+                if (plane <= window_Width/2)
+                    {car_plane = window_Width/2-plane ;}
+
+                if (plane >= window_Width/2)
+                    {car_plane= plane-plane/2;}
+                break;
+
+            }
+
+        return car_plane;
+        }
 
 
 /*

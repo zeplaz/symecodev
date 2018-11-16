@@ -61,7 +61,8 @@ public:
     void  put_priotytrain_on_line();
 
     void draw(sf::RenderWindow &window);
-
+    std::vector<R_linez*> return_prt_lineconections();
+    { return *line_connections; }
 /*
             getelapzed();
           {

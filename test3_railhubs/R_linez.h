@@ -45,7 +45,7 @@ bool *AcessArray_channels= new  bool[2] {false,false};
 railhubz *hub_creator;
 railhubz *out_post;
 
-double vertex_slop;
+
 
 
 //railhubz* rOrign_Station;
@@ -53,6 +53,7 @@ double vertex_slop;
 
 public:
     int line_id;
+    double vertex_slop;
 R_linez(const railhubz& hub_1, const railhubz& hub_2,
         int& total_R_linez):Base_TSym_entity(total_R_linez);
 

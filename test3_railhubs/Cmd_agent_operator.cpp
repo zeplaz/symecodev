@@ -7,15 +7,15 @@
 
 AdjacencyMatrix* Cmd_agent_operator::setup_routmatrix()
 {
-    std::vector<int> current_hublist = Sym_map->hublist();
+    std::vector<int>* current_hublist = Sym_map->hublist();
     AdjacencyMatrix* temp_aj_matrix;
 
-    for (i=0 ; i <current_dispatch_hublist.size(); i++)
+    for (i=0 ; i <current_dispatch_hublist->size(); i++)
     {
         std::vector<R_linez*> temp_line_vec_ptr;
         temp_aj_matrix = Sym_map->create_routingMatrix();
 
-        railhubz* temp_hub_prt Sym_map->get_hub_via_id(current_dispatch_hublist[i]);
+        railhubz* temp_hub_prt Sym_map->get_hub_via_id(current_dispatch_hublist->at(i));
 
         {
 
@@ -32,13 +32,54 @@ AdjacencyMatrix* Cmd_agent_operator::setup_routmatrix()
 
 Cmd_agent_operator::scan_hubs_for_dispatch();
 {
-  std::vector<int> current_dispatch_hublist = prt_mapz.hublist();
-for (i=0; i < current_dispatch_hublist.size(); i++)
+  std::vector<int>* current_dispatch_hublist = Sym_map->hublist();
+for (i=0; i < current_dispatch_hublist->size(); i++)
   {
-    std::vector<int>  merg_priority_Train_list;
+      //std::vector<int>  merg_priority_Train_list;
 
-      temp_hub_id = current_dispatch_hublist[i]
-      temp_hub_id.
+      int temp_hub_id;
+          temp_hub_id = current_dispatch_hublist->at(i);
+
+     railhubz* temp_hub;
+          temp_hub = get_hub_via_id(temp_hub_id);
+
+    int temp_train_id;
+
+    temp_train_id =temp_hub->return_highest_prioty_train_id());
+
+        trainz* prt_train;
+
+            prt_train = get_entity_via_id(temp_train_id)
+
+        std::vector<R_linez*>  tempLine_vector;
+                     tempLine_vector = temp_hub->return_ptr_lineconections();
+
+                    for (int i = 0; i<tempLine_vector->size(); i++ )
+                R_linez* Prt_temp_line =   tempLine_vector[i];
+
+                            ==    Prt_temp_line->vertex_slop;
+
+                    temp_hub->
+                     Prt_temp_line
+                     prt_train->nexthub;
+
+
+
+                 trainpriorty_master_que.push_back(
+
+
+
+            if temp_hub->line[i].idoutpost
+
+
+                railhubz *hub_creator->id;
+
+                    railhubz *out_post->id;
+
+
+        if (drection_sign == line->get_drection())
+        { add to dispach que.}
+
 
   }
 

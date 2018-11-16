@@ -37,7 +37,6 @@ private:
     int hubz;
     int rail_linez;
                                     //std::map<int,R_linez*> Rail_map;
-
     AdjacencyMatrix**  routing = new  AdjacencyMatrix*;
 //inilzate isnaces of maps
     entity_map inst_enity_map;
@@ -64,7 +63,7 @@ public :
         void Register_hubz(railhubz* newhubz);
         railhubz* get_hub_via_id(int id) const
         void remove_hubz(railhubz prt_hub);
-        std::vector<int> hublist();
+        std::vector<int>* hublist();
 
         void Register_entity(Base_TSym_entity* newentity);
         Base_TSym_entity* get_entity_via_id(int id)const;

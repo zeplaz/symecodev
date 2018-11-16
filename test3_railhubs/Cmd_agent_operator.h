@@ -32,7 +32,7 @@ private:
     AdjacencyMatrix* routmatrix;
 //class Sym_Map;
     sid::vector<int> train_list;
-    std::priority_queue<int>* trainpriorty_master_que;
+    std::priority_queue<int> trainpriorty_master_que;
 //std::unordered_map<std::string, std::string>;
     time_t cmd_time_start;
 
@@ -49,7 +49,13 @@ public :
 
     ~Cmd_agent_operator();
 
-    AdjacencyMatrix* setup_routmatrix();
+    AdjacencyMatrix* checkmatrix_forPrioty();
+
+    {
+        for(i++;i<)
+
+    }
+
 
 
 
@@ -62,6 +68,8 @@ public :
     railhubz* Drect_trains_next_rout();
 
     void scan_hubs_for_dispatch_cadiates();
+
+
 
     void create_trainz(int numtraincreat, int priorty, int speed,
                        int beinghub ,int endhub);

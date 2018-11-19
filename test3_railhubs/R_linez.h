@@ -20,7 +20,7 @@
 #include <time.h>
 
 
-template <typename T> float sgn(T val) {
+template <typename T> float sign(T val) {
     return (T(0) < val) - (val < T(0));
 }
 
@@ -39,11 +39,10 @@ protected:
                                 float RL_x2  =0.f;
                                 float RL_y2 =0.f;
 
-int *AcessArray_Drection = new int[2]{0,0};
+double Acess_Drection;
 bool *AcessArray_channels= new  bool[2] {false,false};
 
-railhubz *hub_creator;
-railhubz *out_post;
+
 
 
 
@@ -52,6 +51,10 @@ railhubz *out_post;
 //railhubz* rDestination_station;
 
 public:
+
+    railhubz *hub_creator;
+    railhubz *out_post;
+
     int line_id;
     double vertex_slop;
 R_linez(const railhubz& hub_1, const railhubz& hub_2,
@@ -67,6 +70,10 @@ void update();
  bool handle_msg(const telagram& tela);
 
 void draw(sf::RenderWindow &window);
+
+
+
+double  line__drection_status();
 
 int line__drection_status();
 

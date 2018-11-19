@@ -20,21 +20,32 @@
 
 enum hubNamez {Shebrooke,Toronto,Montreal,QubecCity,Ottowa};
 
-
 class R_lines;
 class trainz;
 class railhubz;
+//class Sym_Map;
 
 class Cmd_agent_operator
  {
 
 private:
     AdjacencyMatrix* routmatrix;
-//class Sym_Map;
-    sid::vector<int> train_list;
-    std::priority_queue<int> trainpriorty_master_que;
-//std::unordered_map<std::string, std::string>;
+
     time_t cmd_time_start;
+    sid::vector<int> train_list;
+
+    struct train_linepar{
+        int train_id;
+        int line_id;
+        double priority;
+        bool  operator < (const train_linepar &o) const
+        {
+            return Priority < o.Priority;
+        }
+    }priority_train_paket;
+
+    std::priority_queue<train_linepar> trainpriorty_master_que;
+
 
 public :
 
@@ -49,16 +60,12 @@ public :
 
     ~Cmd_agent_operator();
 
-    AdjacencyMatrix* checkmatrix_forPrioty();
+                    AdjacencyMatrix* checkmatrix_forPrioty();
 
-    {
-        for(i++;i<)
+                    {
+                        for(i++;i<)
 
-    }
-
-
-
-
+                    }
 
 
     void dispatchtrain();
@@ -69,11 +76,9 @@ public :
 
     void scan_hubs_for_dispatch_cadiates();
 
-
-
     void create_trainz(int numtraincreat, int priorty, int speed,
                        int beinghub ,int endhub);
 
     void create_hubz(int location);
 
-}
+};

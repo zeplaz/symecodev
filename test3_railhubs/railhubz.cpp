@@ -6,7 +6,7 @@ railhubz::~railhubz(){}
 
 railhubz::railhubz(time_t& orgin, sf::Vector2f hub_l, int& totalhubs)
 {
-    id = totalhubs+1;
+    id = totalhubs;
     totalhubs++;
                     //elapsehub = orgenz;
                 //        float px=x;
@@ -40,7 +40,10 @@ railhubz::railhubz(time_t& orgin, sf::Vector2f hub_l, int& totalhubs)
     void railhubz::add_line_connection(R_linez& newline)
     {
         line_connections.push_back(newline);
-        Sym_Map->routing->add_edge(newline->hub2);
+        Sym_Map->inilize_hub_line_for_AMatrix(id,newline->out_post->id);
+
+
+        //Sym_Map->routing->add_edge(newline->hub2);
     //line_connections
     }
 
@@ -51,9 +54,7 @@ railhubz::railhubz(time_t& orgin, sf::Vector2f hub_l, int& totalhubs)
 
     void railhubz::put_priotytrain_on_line()
     {
-            //int temptrain_id;
-    //    temptrain_id = Trainprotyque.Highest_priorty()
-        //temptrain_id->move();
+
         Trainprotyque.delet(Trainprotyque.Highest_priorty());
     }
 

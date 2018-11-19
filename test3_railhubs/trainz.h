@@ -36,10 +36,15 @@ private:
 
     railhubz* Orign_Station;
     railhubz* Destination_station;
-
+    int active_line;
     clock_t Orgin_clock;
     time_t current_t;
 
+
+    struct Linedata line_data1{
+        double dre_dxr;
+        int     rail_line_active;
+    };
 
 public:
     railhubz* Next_hub;
@@ -55,9 +60,16 @@ public:
      ~trainz();
 
     void hault();
-    void move();
-    bool  arived_final();
+    void move(int enter_line_id);
 
+    bool  arived_final();
+    sf::Vector2f* get_prt_location_train();
+
+    {    sf::Vector2f* prt_location;
+
+        prt_location* = current_location;
+        reutrn (prt_location);
+    }
 //bool Enter_next();
 //void Leave_current();
     void update();

@@ -4,7 +4,7 @@
 #define TELAGRAM_H
 
 #include <math.h>
-
+#include "msg_cmdz.h>"
 const double Smallest_Delay =0.20;
 
 template <class Type>

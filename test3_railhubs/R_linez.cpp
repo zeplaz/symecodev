@@ -82,14 +82,18 @@ switch (tela.msg)
         {
 
     case enter_line :
-    {
+    {    //   if (tela.Other_data > 0)
+            Acess_Drection =+ tela.Other_data.dre_dxr*vertex_slop;
+                //else {Acess_Drection =- tela.Other_data;}
+
+
         if (AcessArray_channels[0] ==false)
             {AcessArray_channels[0] =true;}
         else
             {AcessArray_channels[1] =true};
 
-            telagram  cmd_telamove(0,this->line_id, train_on_line->Train_id,
-                           train_on_line->esclatcatator_priority , move_cmd);
+            telagram  cmd_telamove(this->line_id,tela.sender,
+                           -1, move_cmd);
                            this->Handle_telagram(cmd_telamove);
 
         }
@@ -100,14 +104,14 @@ switch (tela.msg)
 
             if (AcessArray_channels[1] ==true)
                 {AcessArray_channels[1] =false;
-                AcessArray_Drection[1] =0;
+            Acess_Drection =- tela.Other_data*vertex_slop;
                 return true;
                 break;
                 }
 
             if (AcessArray_channels[1] ==false)
                 {AcessArray_channels[0]=  false;
-                AcessArray_Drection[0] =0;
+                Acess_Drection =0;
                 return true;
                 break;
                 }
@@ -143,32 +147,39 @@ railhubz* temprail_nexthub = train_on_line->next_hub;
 
 }
 
-int line__drection_status()
+double  R_linez::line__drection_status()
 {
-AcessArray_Drection[0]*AcessArray_Drection[1];
-
-creator->
-
+return(Acess_Drection);
 
 }
 
 
 
-bool R_linez::can_add_train_tochannel()
+bool R_linez::can_add_train_tochannel(sf::Vector2f* currnt_l,sf::Vector2f* next_l)
 {
+        if (AcessArray_channels[0] == true && AcessArray_channels[1] == true)
+                {
+                return false;
+                }
 
-//if (sgn() == sgn(AcessArray_Drection) || sgn(AcessArray_Drection==0 )
-{       if (AcessArray_channels[0] == false && AcessArray_channels[1] == false)
+        if (AcessArray_channels[0] == false && AcessArray_channels[1] == false)
                 {
                 return true;
                 }
 
         if (AcessArray_channels[0] == true && AcessArray_channels[1] == false)
-                //AcessArray_channels[1] = true;
-                //drection()
-
-                if (AcessArray_Drection[0]== )
+            {
+             if (sign(Drectional_dxr(*currnt_l,*next_l)) == sign(Acess_Drection))
+                {
                 return true;
                 }
+            }
+        if (AcessArray_channels[0] == false && AcessArray_channels[1] == true)
+            {
+             if (sign(Drectional_dxr(*currnt_l,*next_l)) == sign(Acess_Drection))
+               {
+               return true;
+               }
+            }
     return false;
 }

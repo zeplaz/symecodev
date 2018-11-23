@@ -1,23 +1,23 @@
 
 
-template <class F>
+    template <class F>
 
-struct FunctionType;
+    struct FunctionType;
 
-template <class R, class Object, class... Args>
-struct FunctionType<R (Object::*)(Args...)>
-{
-  typedef R return_type;
-};
+    template <class R, class Object, class... Args>
+    struct FunctionType<R (Object::*)(Args...)>
+    {
+      typedef R return_type;
+    };
 
-template <class R, class Object, class... Args>
-struct FunctionType<R (Object::*)(Args...) const>
-{
-  typedef R return_type;
-};
+    template <class R, class Object, class... Args>
+    struct FunctionType<R (Object::*)(Args...) const>
+    {
+      typedef R return_type;
+    };
 
 
-template <class Object_>
+    template <class Object_>
 
 
 
